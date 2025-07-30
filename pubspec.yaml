@@ -1,23 +1,28 @@
-name: erp_app_nood
-description: "A new Flutter project."
-publish_to: 'none' 
+name: work_manager
+description: A Flutter project for managing daily tasks with GetX.
+publish_to: 'none' # Remove this line if you want to publish to pub.dev
+
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.0
+  sdk: '>=3.2.0 <4.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.10  
+
+  get: ^4.6.6
+  cupertino_icons: ^1.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-flutter:
+  flutter_lints: ^3.0.1
 
+flutter:
   uses-material-design: true
+
   assets:
     - assets/images/
-    - assets/icons/
-    - assets/fonts/
+    - assets/svg/
