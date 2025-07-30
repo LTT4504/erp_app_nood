@@ -8,8 +8,8 @@ class ApiClient {
   static final Dio dio = Dio(
     BaseOptions(
       baseUrl: ApiConstant.baseUrl,
-      connectTimeout: Duration(seconds: 10),
-      receiveTimeout: Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
       contentType: 'application/json',
     ),
   )..interceptors.add(AppInterceptors());

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../modules/auth/auth_view.dart';
-
+import '../modules/home/home.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -9,10 +9,10 @@ class AppPages {
       name: AppRoutes.login,
       page: () => const AuthView(),
     ),
-    // GetPage(
-    //   name: AppRoutes.home,
-    //   page: () => const HomeScreen(),
-    // ),
+    GetPage(
+      name: AppRoutes.home,
+      page: () => const HomeScreen(),
+    ),
     
   ];
 }
