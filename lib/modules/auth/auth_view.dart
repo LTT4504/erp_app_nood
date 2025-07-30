@@ -1,7 +1,8 @@
-import 'package:erp_app_nood/shared/shared.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../shared/shared.dart';
 import 'auth_controller.dart';
 
 class AuthView extends GetView<AuthController> {
@@ -33,7 +34,7 @@ class AuthView extends GetView<AuthController> {
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
               ),
@@ -102,7 +103,7 @@ class AuthView extends GetView<AuthController> {
                     const Spacer(),
                     GestureDetector(
                       onTap: controller.forgotPassword,
-                      child: Text(
+                      child: const Text(
                         "Forgot Password?",
                         style: TextStyle(color: ColorConstants.highlightPrimary),
                       ),
@@ -160,7 +161,7 @@ class AuthView extends GetView<AuthController> {
       prefixIcon: Icon(icon, color: primaryColor),
       suffixIcon: suffix,
       labelStyle: TextStyle(color: primaryColor),
-      hintStyle: TextStyle(color: primaryColor.withOpacity(0.6)),
+      hintStyle: TextStyle(color: primaryColor.withValues(alpha: 0.6)),
       filled: true,
       fillColor: ColorConstants.lightGray,
       enabledBorder: OutlineInputBorder(

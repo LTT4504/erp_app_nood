@@ -1,10 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:erp_app_nood/api/auth_service.dart';
-import 'package:erp_app_nood/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../models/model/response/auth_respon.dart';
+import '../../api/auth_service.dart';
+import '../../routes/routes.dart';
 
 
 class AuthController extends GetxController {
@@ -36,11 +34,11 @@ class AuthController extends GetxController {
         return;
       }
 
-      final response = await _authService.login(
-        username: username,
-        password: password,
-        rememberMe: rememberMe.value,
-      );
+      // final response = await _authService.login(
+      //   username: username,
+      //   password: password,
+      //   rememberMe: rememberMe.value,
+      // );
 
       // Lưu token, user info ở đây nếu cần
     

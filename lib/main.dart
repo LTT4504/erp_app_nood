@@ -1,9 +1,9 @@
-import 'package:erp_app_nood/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'modules/auth/auth_binding.dart';
 import 'modules/auth/auth_view.dart';
+import 'routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
