@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:work_manager/modules/home/widgets/home_bottom.dart';
+import 'package:erp_app_nood/modules/home/widgets/home_bottom.dart';
 import 'widgets/home_app_bar.dart';
 import 'widgets/home_date.dart';
 import 'widgets/home_menu_grid.dart';

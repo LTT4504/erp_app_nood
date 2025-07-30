@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:work_manager/modules/home/home_controller.dart';
-import 'package:work_manager/modules/home/widgets/home_section.dart';
+import 'package:erp_app_nood/modules/home/home_controller.dart';
+import 'package:erp_app_nood/modules/home/widgets/home_section.dart';
 
 class HomeTaskList extends GetView<HomeController> {
   const HomeTaskList({super.key});

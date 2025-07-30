@@ -1,14 +1,18 @@
 import 'package:get/get.dart';
-import '../../modules/home/home.dart';
+import '../modules/auth/auth_view.dart';
+
 import 'app_routes.dart';
 
 class AppPages {
-  static final pages = [
+  static final routes = [
     GetPage(
-      name: AppRoutes.home,
-      page: () => const HomeScreen(),
-      binding: HomeBinding(),
+      name: AppRoutes.login,
+      page: () => const AuthView(),
     ),
-    // Thêm các GetPage khác tại đây
+    // GetPage(
+    //   name: AppRoutes.home,
+    //   page: () => const HomeScreen(),
+    // ),
+    
   ];
 }
