@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../task/task_controller.dart';  
-import 'home_section.dart';
+import 'task_controller.dart';
 
-class HomeTaskList extends GetView<TaskController> { 
-  const HomeTaskList({super.key});
+class TaskList extends GetView<TaskController> {
+  const TaskList({super.key});
 
   Color _priorityColor(String level) {
     switch (level) {
@@ -35,15 +34,14 @@ class HomeTaskList extends GetView<TaskController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final tasks = controller.tasks; // ✅ Lấy từ TaskController
+      final tasks = controller.tasks;
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionTitle(
-            title: "Today's Work",
-            actionText: "Tất cả (${tasks.length})",
-            onAction: () {},
+          const Text(
+            "Today's Work",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 12),
           Container(
@@ -53,7 +51,10 @@ class HomeTaskList extends GetView<TaskController> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: const [
                 BoxShadow(
-                    color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))
+                  color: Colors.black12,
+                  blurRadius: 6,
+                  offset: Offset(0, 2),
+                )
               ],
             ),
             child: ListView.separated(
@@ -65,21 +66,17 @@ class HomeTaskList extends GetView<TaskController> {
               itemBuilder: (_, index) {
                 final task = tasks[index];
                 return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Row(
                     children: [
                       Container(
-                        constraints: const BoxConstraints(minWidth: 60),
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: _priorityColor(task.priority),
+                          color: _priorityColor(task.priorityLabel),
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Text(task.priority,
-                            style: const TextStyle(fontSize: 12)),
+                        child: Text(task.priorityLabel,
+                            style: const TextStyle(fontSize: 12, color: Colors.white)),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -87,8 +84,7 @@ class HomeTaskList extends GetView<TaskController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(task.title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500)),
+                                style: const TextStyle(fontWeight: FontWeight.w500)),
                             Text(task.project,
                                 style: const TextStyle(color: Colors.grey)),
                           ],
@@ -96,17 +92,13 @@ class HomeTaskList extends GetView<TaskController> {
                       ),
                       const SizedBox(width: 8),
                       Container(
-                        constraints: const BoxConstraints(minWidth: 80),
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
-                          color: _statusColor(task.status),
+                          color: _statusColor(task.statusLabel),
                           borderRadius: BorderRadius.circular(4),
                         ),
-                        child: Text(task.status,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 12)),
+                        child: Text(task.statusLabel,
+                            style: const TextStyle(fontSize: 12, color: Colors.black)),
                       ),
                     ],
                   ),

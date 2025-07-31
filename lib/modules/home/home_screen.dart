@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/shared/constants/colors.dart';
+import '../task/task_list.dart';
 import 'home_controller.dart';
 import 'home_menu_tab.dart';
 import 'widgets/home_app_bar.dart';
 import 'widgets/home_bottom.dart';
 import 'widgets/home_date.dart';
 import 'widgets/home_menu_grid.dart';
-import 'widgets/home_task_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 24),
             HomeMenuGrid(),
             SizedBox(height: 24),
-            HomeTaskList(),
+            TaskList(),
           ],
         );
       case 1:
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
     return GetBuilder<HomeController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: Colors.grey.shade100,
+          backgroundColor: ColorConstants.highlightPrimaryPastel,
           body: Column(
             children: [
               const HomeAppBar(),
