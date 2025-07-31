@@ -22,7 +22,7 @@ class AuthView extends GetView<AuthController> {
         // Logo
         Image.asset(
           AssetPath.iconNinePlus,
-          height: 280,
+          height: 300,
         ),
         
 
