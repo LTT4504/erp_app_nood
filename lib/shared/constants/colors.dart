@@ -10,7 +10,7 @@ class ColorConstants {
 
   // Highlight Colors
   static const Color highlightPrimary = Color(0xFF349A13);
-   static const Color highlightPrimaryPastel = Color.fromARGB(255, 212, 238, 204);
+   static const Color highlightPrimaryPastel = Color.fromARGB(255, 223, 245, 216);
   static const Color highlightSecondary = Color(0xFFFFA84A);
   static const Color highlightTertiary = Color(0xFF6FBAFF);
   static const Color highlightQuaternary = Color(0xFFB4DBFF);

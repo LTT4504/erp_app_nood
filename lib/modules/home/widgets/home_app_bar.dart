@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:work_manager/shared/shared.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -7,7 +8,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF2AA952),
+        color: ColorConstants.highlightPrimary,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(24),
         ),
