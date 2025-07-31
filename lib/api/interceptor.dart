@@ -22,7 +22,7 @@ class AppInterceptors extends Interceptor {
       options.headers['Authorization'] = 'Bearer $token';
     }
 
-    log.i('➡️ REQUEST [${options.method}] => PATH: ${options.uri}');
+    log.i('REQUEST [${options.method}] => PATH: ${options.uri}');
     log.d('Headers: ${options.headers}');
     log.d('Data: ${options.data}');
 
@@ -31,14 +31,14 @@ class AppInterceptors extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    log.i('✅ RESPONSE [${response.statusCode}] => PATH: ${response.requestOptions.uri}');
+    log.i('RESPONSE [${response.statusCode}] => PATH: ${response.requestOptions.uri}');
     log.d('Response: ${response.data}');
     handler.next(response);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    log.e('❌ ERROR [${err.response?.statusCode}] => PATH: ${err.requestOptions.uri}',
+    log.e('ERROR [${err.response?.statusCode}] => PATH: ${err.requestOptions.uri}',
         error: err, stackTrace: err.stackTrace);
     handler.next(err);
   }

@@ -3,11 +3,16 @@ import 'models/home_task.dart';
 
 class HomeController extends GetxController {
   final tasks = <HomeTask>[].obs;
+  int currentTab = 0;
 
   @override
   void onInit() {
     super.onInit();
     loadTasks();
+  }
+   void changeTab(int index) {
+    currentTab = index;
+    update(); // Cập nhật UI
   }
 
   void loadTasks() {
