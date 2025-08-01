@@ -26,14 +26,13 @@ class HomeMenuTab extends StatelessWidget {
           leading: const Icon(Icons.person),
           title: const Text('Thông tin cá nhân'),
           onTap: () {
-            // TODO
           },
         ),
         ListTile(
           leading: const Icon(Icons.lock),
           title: const Text('Đổi mật khẩu'),
           onTap: () {
-            // TODO
+            
           },
         ),
         const Divider(height: 48),

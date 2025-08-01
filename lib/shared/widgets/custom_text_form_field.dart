@@ -35,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: Icon(icon, color: primaryColor),
         suffixIcon: suffix,
         labelStyle: TextStyle(color: primaryColor),
-        hintStyle: TextStyle(color: primaryColor.withOpacity(0.6)),
+        hintStyle: TextStyle(color: primaryColor.withValues(alpha: 0.6)),
         filled: true,
         fillColor: const Color(0xFFF5F5F5), // Light gray
         enabledBorder: OutlineInputBorder(

@@ -1,10 +1,10 @@
 // services/auth_service.dart
 
 import 'package:dio/dio.dart';
-import '../api/api_client.dart';
-import '../api/api_constant.dart';
+import '../../api/api_client.dart';
+import '../../api/api_constant.dart';
 
-import '../models/model/response/auth_respon.dart';
+import '../../models/model/response/auth/auth_response.dart';
 
 class AuthService {
   final Dio _dio = ApiClient.dio;

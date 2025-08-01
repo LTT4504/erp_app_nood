@@ -27,7 +27,7 @@ class AuthView extends GetView<AuthController> {
 
               // Login Card
               Container(
-                padding: const EdgeInsets.fromLTRB(16, 30, 16, 30),
+                padding: const EdgeInsets.fromLTRB(16, 20, 16, 30),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(24),
@@ -42,7 +42,28 @@ class AuthView extends GetView<AuthController> {
                 child: Form(
                   key: controller.formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Title
+                      const Text(
+                        "Login",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      const Text(
+                        "Please log in to continue.",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black54,
+                        ),
+                      ),
+
+                      const SizedBox(height: 24),
                       // Username
                       CustomTextFormField(
                         label: "Username",
@@ -92,8 +113,7 @@ class AuthView extends GetView<AuthController> {
                         children: [
                           Obx(() => Checkbox(
                                 value: controller.rememberMe.value,
-                                activeColor: ColorConstants
-                                    .highlightPrimary, 
+                                activeColor: ColorConstants.highlightPrimary,
                                 onChanged: (value) =>
                                     controller.toggleRememberMe(value),
                               )),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'modules/auth/auth_binding.dart';
-import 'modules/auth/auth_view.dart';
 import 'routes/routes.dart';
 
 void main() async {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Nine Plus',
       debugShowCheckedModeBanner: false,
       initialBinding: AuthBinding(),
-      home: const AuthView(),
+     initialRoute: AppRoutes.splash,
       getPages: AppPages.routes,
     );
   }
