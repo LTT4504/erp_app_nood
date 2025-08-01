@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:work_manager/shared/shared.dart';
+
 import '../../routes/routes.dart';
+import '../../shared/shared.dart';
 import '../../shared/widgets/custom_button.dart';
 
 class SentEmailSuccessScreen extends StatelessWidget {
@@ -33,9 +34,14 @@ class SentEmailSuccessScreen extends StatelessWidget {
               const SizedBox(height: 24),
               CustomButton(
                 label: 'Back to Login',
-               onPressed: () {
-            Get.offAllNamed(AppRoutes.login);
-          },
+                onPressed: () {
+                  // Cách 1: không delete để controller còn dùng nếu quay lại
+                  Get.offAllNamed(AppRoutes.login);
+                  
+                  // Cách 2: nếu muốn xoá thì phải đảm bảo không tái sử dụng
+                  // Get.delete<ForgotPasswordController>();
+                  // Get.offAllNamed(AppRoutes.login);
+                },
               ),
             ],
           ),

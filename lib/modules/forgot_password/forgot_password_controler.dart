@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../api/auth_service.dart';
+import 'package:dio/dio.dart';
+
+import '../../shared/services/auth_service.dart';
 import '../../routes/routes.dart';
 
 class ForgotPasswordController extends GetxController {
@@ -10,7 +12,7 @@ class ForgotPasswordController extends GetxController {
   Future<void> sendResetEmail() async {
     final email = emailController.text.trim();
     if (email.isEmpty || !email.contains('@')) {
-      Get.snackbar('Lỗi', 'Vui lòng nhập email hợp lệ');
+      Get.snackbar('Error', 'Please enter a valid email.');
       return;
     }
 
@@ -18,8 +20,14 @@ class ForgotPasswordController extends GetxController {
     try {
       await AuthService().forgotPassword(email);
       Get.offNamed(AppRoutes.emailSentSuccess);
-    } catch (e) {
-      Get.snackbar('Lỗi', e.toString());
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        Get.snackbar('Error', 'Email does not exist.');
+      } else {
+        Get.snackbar('Error', 'Something went wrong. Please try again.');
+      }
+    } catch (_) {
+      Get.snackbar('Error', 'Unexpected error occurred.');
     } finally {
       isLoading.value = false;
     }
@@ -27,7 +35,7 @@ class ForgotPasswordController extends GetxController {
 
   @override
   void onClose() {
-    emailController.dispose();
+    emailController.dispose(); // dispose đúng cách
     super.onClose();
   }
 }

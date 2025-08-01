@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeMenuGrid extends StatelessWidget {
   const HomeMenuGrid({super.key});
@@ -11,6 +12,7 @@ class HomeMenuGrid extends StatelessWidget {
         'label': 'Attendance',
         'bgColor': const Color(0xFFE3F3FE),
         'iconColor': const Color(0xFF1994F2),
+        'route': '/attendance',
       },
       {
         'icon': Icons.calendar_today,
@@ -72,24 +74,31 @@ class HomeMenuGrid extends StatelessWidget {
         ),
         itemBuilder: (_, index) {
           final item = items[index];
-          return Column(
-            children: [
-              CircleAvatar(
-                radius: 24,
-                backgroundColor: item['bgColor'] as Color,
-                child: Icon(
-                  item['icon'] as IconData,
-                  color: item['iconColor'] as Color,
-                  size: 30,
+          return GestureDetector(
+            onTap: () {
+              if (item['route'] != null) {
+                Get.toNamed(item['route'] as String);
+              }
+            },
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 24,
+                  backgroundColor: item['bgColor'] as Color,
+                  child: Icon(
+                    item['icon'] as IconData,
+                    color: item['iconColor'] as Color,
+                    size: 30,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                item['label'].toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 12),
-              ),
-            ],
+                const SizedBox(height: 6),
+                Text(
+                  item['label'].toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
           );
         },
       ),

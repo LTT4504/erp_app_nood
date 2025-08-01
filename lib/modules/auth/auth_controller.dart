@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../api/auth_service.dart';
+import '../../shared/services/auth_service.dart';
 import '../../routes/routes.dart';
 import '../../shared/services/token_storage.dart';
 
