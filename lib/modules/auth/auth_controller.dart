@@ -19,18 +19,19 @@ class AuthController extends GetxController {
   final storage = GetStorage();
 
   @override
-  void onInit() {
-    super.onInit();
-
-    // Load rememberMe flag
-    rememberMe.value = storage.read('rememberMe') ?? false;
-
-    // Nếu rememberMe = true thì tự điền lại thông tin
+void onInit() {
+  super.onInit();
+  try {
+    rememberMe.value = TokenStorage.getRememberMe();
     if (rememberMe.value) {
-      usernameController.text = storage.read('username') ?? '';
-      passwordController.text = storage.read('password') ?? '';
+      usernameController.text = TokenStorage.getSavedUsername() ?? '';
+      passwordController.text = TokenStorage.getSavedPassword() ?? '';
     }
+  } catch (e) {
+    debugPrint('Storage read error: $e');
+    rememberMe.value = false;
   }
+}
 
   void toggleShowPassword() {
     showPassword.value = !showPassword.value;
@@ -81,22 +82,9 @@ class AuthController extends GetxController {
     }
   }
 
-  void forgotPassword() async {
-    final email = usernameController.text.trim();
-
-    if (!GetUtils.isEmail(email)) {
-      Get.snackbar("Invalid Email", "Please enter a valid email.");
-      return;
-    }
-
-    try {
-      await _authService.forgotPassword(email);
-      Get.snackbar("Success", "Password reset email sent.");
-    } catch (e) {
-      final msg = (e is DioException) ? e.response?.data['message'] : e.toString();
-      Get.snackbar('Forgot Password Failed', msg.toString());
-    }
-  }
+  void forgotPassword() {
+  Get.toNamed(AppRoutes.forgotPassword);
+}
 
   void logout() async {
     await TokenStorage.logout(); // gọi logout logic có check rememberMe
