@@ -24,7 +24,8 @@ class SentEmailSuccessScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.email_outlined, size: 100, color: ColorConstants.highlightPrimary),
+              const Icon(Icons.email_outlined,
+                  size: 100, color: ColorConstants.highlightPrimary),
               const SizedBox(height: 16),
               const Text(
                 'A reset email has been sent. Please check your inbox.',
@@ -33,16 +34,8 @@ class SentEmailSuccessScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               CustomButton(
-                label: 'Back to Login',
-                onPressed: () {
-                  // Cách 1: không delete để controller còn dùng nếu quay lại
-                  Get.offAllNamed(AppRoutes.login);
-                  
-                  // Cách 2: nếu muốn xoá thì phải đảm bảo không tái sử dụng
-                  // Get.delete<ForgotPasswordController>();
-                  // Get.offAllNamed(AppRoutes.login);
-                },
-              ),
+                  label: 'Back to Login',
+                  onPressed: () => Get.until((route) => route.settings.name == AppRoutes.login)),
             ],
           ),
         ),

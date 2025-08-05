@@ -19,19 +19,19 @@ class AuthController extends GetxController {
   final storage = GetStorage();
 
   @override
-void onInit() {
-  super.onInit();
-  try {
-    rememberMe.value = TokenStorage.getRememberMe();
-    if (rememberMe.value) {
-      usernameController.text = TokenStorage.getSavedUsername() ?? '';
-      passwordController.text = TokenStorage.getSavedPassword() ?? '';
+  void onInit() {
+    super.onInit();
+    try {
+      rememberMe.value = TokenStorage.getRememberMe();
+      if (rememberMe.value) {
+        usernameController.text = TokenStorage.getSavedUsername() ?? '';
+        passwordController.text = TokenStorage.getSavedPassword() ?? '';
+      }
+    } catch (e) {
+      debugPrint('Storage read error: $e');
+      rememberMe.value = false;
     }
-  } catch (e) {
-    debugPrint('Storage read error: $e');
-    rememberMe.value = false;
   }
-}
 
   void toggleShowPassword() {
     showPassword.value = !showPassword.value;
@@ -43,51 +43,47 @@ void onInit() {
   }
 
   void login() async {
+    if (!formKey.currentState!.validate()) return;
+
+    final username = usernameController.text.trim();
+    final password = passwordController.text;
     try {
-      final username = usernameController.text.trim();
-      final password = passwordController.text;
-
-      if (username.isEmpty || password.isEmpty) {
-        Get.snackbar('Error', 'Username or password is empty');
-        return;
-      }
-
       final response = await _authService.login(
         username: username,
         password: password,
         rememberMe: rememberMe.value,
       );
+      if (response.status == 200 && response.success) {
+        await TokenStorage.saveAccessToken(response.data.accessToken);
+        await TokenStorage.saveRefreshToken(response.data.refreshToken);
 
-      await TokenStorage.saveAccessToken(response.data.accessToken);
-      await TokenStorage.saveRefreshToken(response.data.refreshToken);
+        if (rememberMe.value) {
+          await storage.write('username', username);
+          await storage.write('password', password);
+        } else {
+          await storage.remove('username');
+          await storage.remove('password');
+        }
 
-      // ✅ Lưu thông tin nếu có rememberMe
-      if (rememberMe.value) {
-        await storage.write('username', username);
-        await storage.write('password', password);
-      } else {
-        await storage.remove('username');
-        await storage.remove('password');
+        // ✅ Chuyển màn hình chính, AuthController có thể bị xoá → dùng fenix
+        Get.offAllNamed(AppRoutes.home);
       }
-
-      // Chuyển sang màn hình chính
-      Get.offAllNamed(AppRoutes.home);
     } catch (e) {
       if (e is DioException) {
-        final msg = e.response?.data['message'] ?? 'Login failed';
-        Get.snackbar('Login Failed', msg.toString());
+        final msg = e.response?.data['message'] ?? 'Đăng nhập thất bại';
+        Get.snackbar('Lỗi đăng nhập', msg.toString());
       } else {
-        Get.snackbar('Error', e.toString());
+        Get.snackbar('Lỗi', e.toString());
       }
     }
   }
 
   void forgotPassword() {
-  Get.toNamed(AppRoutes.forgotPassword);
-}
+    Get.toNamed(AppRoutes.forgotPassword);
+  }
 
   void logout() async {
-    await TokenStorage.logout(); // gọi logout logic có check rememberMe
+    await TokenStorage.logout();
     Get.offAllNamed(AppRoutes.login);
   }
 

@@ -19,7 +19,7 @@ class ForgotPasswordController extends GetxController {
     isLoading.value = true;
     try {
       await AuthService().forgotPassword(email);
-      Get.offNamed(AppRoutes.emailSentSuccess);
+      Get.toNamed(AppRoutes.emailSentSuccess);
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) {
         Get.snackbar('Error', 'Email does not exist.');

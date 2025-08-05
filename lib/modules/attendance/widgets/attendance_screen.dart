@@ -19,8 +19,8 @@ class AttendanceScreen extends GetView<AttendanceController> {
         }
 
         final status = controller.status.value;
-        final isCheckedIn = status?.isCheckedIn == true;
-        final lastCheckIn = _formatTime(status?.lastCheckInTime);
+        final isCheckedIn = status?.checkIn == true;
+        final lastCheckIn = _formatTime(status?.checkInDateTime);
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
@@ -40,26 +40,31 @@ class AttendanceScreen extends GetView<AttendanceController> {
               ),
               const SizedBox(height: 16),
 
-              // Nút tương ứng với trạng thái chấm công
-              if (!isCheckedIn)
+              if (status == null)
+                const SizedBox.shrink()
+              else if (status.canCheckIn)
                 CustomButton(
                   label: 'Check In',
                   icon: Icons.login,
-                  onPressed: controller.checkIn,
+                  onPressed: () async {
+                    await controller.checkIn();
+                  },
                 )
-              else if (status?.canCheckOut == true)
+              else if (status.canCheckOut)
                 CustomButton(
                   label: 'Check Out',
                   icon: Icons.logout,
                   backgroundColor: Colors.redAccent,
-                  onPressed: controller.checkOut,
+                  onPressed: () async {
+                    await controller.checkOut();
+                  },
                 )
               else
                 CustomButton(
                   label: 'Đã Check Out',
                   icon: Icons.check_circle,
                   backgroundColor: Colors.grey,
-                  onPressed: () {}, // dùng hàm rỗng
+                  onPressed: () {},
                   enabled: false,
                 ),
 
@@ -78,9 +83,9 @@ class AttendanceScreen extends GetView<AttendanceController> {
                   itemBuilder: (_, index) {
                     final item = controller.history[index];
                     return AttendanceCard(
-                      date: item.date,
-                      checkIn: item.checkInTime,
-                      checkOut: item.checkOutTime,
+                      date: item.workDay ?? '-',
+                      checkIn: item.checkInOn,
+                      checkOut: item.checkOutOn,
                     );
                   },
                 ),

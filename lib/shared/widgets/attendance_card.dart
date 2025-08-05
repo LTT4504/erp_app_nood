@@ -26,8 +26,21 @@ class AttendanceCard extends StatelessWidget {
       elevation: 3,
       child: ListTile(
         leading: const Icon(Icons.calendar_today),
-        title: Text(formattedDate, style: const TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text('Vào: $formattedCheckIn — Ra: $formattedCheckOut'),
+        title: Text(
+          formattedDate,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Row(
+          children: [
+            const Icon(Icons.login, size: 16, color: Colors.green),
+            const SizedBox(width: 4),
+            Text('Vào: $formattedCheckIn'),
+            const SizedBox(width: 12),
+            const Icon(Icons.logout, size: 16, color: Colors.red),
+            const SizedBox(width: 4),
+            Text('Ra: $formattedCheckOut'),
+          ],
+        ),
       ),
     );
   }

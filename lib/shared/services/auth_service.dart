@@ -14,6 +14,7 @@ class AuthService {
     required String password,
     bool rememberMe = false,
   }) async {
+    
     final response = await _dio.post(ApiConstant.login, data: {
       'username': username,
       'password': password,

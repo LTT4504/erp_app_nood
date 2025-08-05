@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import '../../api/api_client.dart';
 import '../../api/api_constant.dart';
-import '../../models/model/response/attendance/attendance_status_response/attendance_history_response.dart';
 import '../../models/model/response/attendance/attendance_status_response/attendance_status_response.dart';
+import '../../models/model/response/attendance/attendance_status_response/attendance_history_response.dart';
 import '../../models/model/response/attendance/checkin_response/checkin_response.dart';
 import '../../models/model/response/attendance/checkout_reponse/checkout_response.dart';
 import '../utils/logger/logger.dart';
@@ -10,37 +10,26 @@ import '../utils/logger/logger.dart';
 class AttendanceService {
   static final Dio _dio = ApiClient.dio;
 
-  static Future<CheckInResponse> checkIn() async {
-    try {
-      final response = await _dio.post(ApiConstant.checkIn);
-      return CheckInResponse.fromJson(response.data);
-    } catch (e, stackTrace) {
-      log.e('Check-in failed', error: e, stackTrace: stackTrace);
-      rethrow;
-    }
-  }
-
-  static Future<CheckOutResponse> checkOut() async {
-    try {
-      final response = await _dio.post(ApiConstant.checkOut);
-      return CheckOutResponse.fromJson(response.data);
-    } catch (e, stackTrace) {
-      log.e('Check-out failed', error: e, stackTrace: stackTrace);
-      rethrow;
-    }
-  }
-
-  static Future<AttendanceStatusResponse> getStatus() async {
+  static Future<AttendanceStatusResponse> fetchCurrentStatus() async {
     try {
       final response = await _dio.get(ApiConstant.attendanceStatus);
-      return AttendanceStatusResponse.fromJson(response.data);
+      log.i('Trạng thái hiện tại: ${response.data}');
+
+      // Kiểm tra response (dùng trường 'success' và 'data' chữ thường)
+      if (response.statusCode == 200 && response.data['success'] == true) {
+        final data = response.data['data'];
+        return AttendanceStatusResponse.fromJson(data);
+      } else {
+        final message = response.data['message'] ?? 'Lỗi không xác định';
+        throw Exception(message);
+      }
     } catch (e, stackTrace) {
-      log.e('Get status failed', error: e, stackTrace: stackTrace);
+      log.e('Lỗi khi lấy trạng thái hiện tại', error: e, stackTrace: stackTrace);
       rethrow;
     }
   }
 
-  static Future<List<AttendanceHistoryData>> getHistory({
+  static Future<List<AttendanceHistoryData>> fetchHistory({
     required String startDate,
     required String endDate,
     int pageNumber = 1,
@@ -56,17 +45,66 @@ class AttendanceService {
           'PageSize': pageSize,
         },
       );
+      log.i('Lịch sử chấm công: ${response.data}');
 
-      final data = response.data['data'];
-      if (data is List) {
-        return data.map((e) => AttendanceHistoryData.fromJson(e)).toList();
+      if (response.statusCode == 200 && response.data['success'] == true) {
+        final data = response.data['data'];
+        if (data is List) {
+          return data.map((e) => AttendanceHistoryData.fromJson(e)).toList();
+        } else {
+          log.w('Dữ liệu lịch sử không đúng định dạng');
+          return [];
+        }
       } else {
-        log.w('⚠️ Unexpected data format in attendance history');
-        return [];
+        final message = response.data['message'] ?? 'Lỗi không xác định';
+        throw Exception(message);
       }
     } catch (e, stackTrace) {
-      log.e('❌ Get history failed', error: e, stackTrace: stackTrace);
+      log.e('Lỗi khi lấy lịch sử chấm công', error: e, stackTrace: stackTrace);
       return [];
+    }
+  }
+
+  static Future<CheckInResponse> checkIn() async {
+    try {
+      final response = await _dio.post(ApiConstant.checkIn);
+      log.i('Check-in response: ${response.data}');
+
+      if (response.statusCode == 200 && response.data['success'] == true) {
+        final data = response.data['data'];
+        return CheckInResponse.fromJson(data);
+      } else {
+        String message = response.data['message'] ?? 'Check-in thất bại';
+        // Nếu có errors, lấy details đầu tiên
+        if (response.data['errors'] != null && response.data['errors'] is List && response.data['errors'].isNotEmpty) {
+          final firstError = response.data['errors'][0];
+          if (firstError is Map && firstError['details'] != null) {
+            message = firstError['details'];
+          }
+        }
+        throw Exception(message);
+      }
+    } catch (e, stackTrace) {
+      log.e('Lỗi khi check-in', error: e, stackTrace: stackTrace);
+      rethrow;
+    }
+  }
+
+  static Future<CheckOutResponse> checkOut() async {
+    try {
+      final response = await _dio.post(ApiConstant.checkOut);
+      log.i('Check-out response: ${response.data}');
+
+      if (response.statusCode == 200 && response.data['success'] == true) {
+        final data = response.data['data'];
+        return CheckOutResponse.fromJson(data);
+      } else {
+        final message = response.data['message'] ?? 'Check-out thất bại';
+        throw Exception(message);
+      }
+    } catch (e, stackTrace) {
+      log.e('Lỗi khi check-out', error: e, stackTrace: stackTrace);
+      rethrow;
     }
   }
 }

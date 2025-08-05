@@ -1,8 +1,5 @@
-// widgets/attendance_controller.dart
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../models/model/response/attendance/attendance_status_response/attendance_history_response.dart';
 import '../../../models/model/response/attendance/attendance_status_response/attendance_status_response.dart';
 import '../../../shared/services/attendance_service.dart';
@@ -10,45 +7,47 @@ import '../../../shared/services/attendance_service.dart';
 class AttendanceController extends GetxController {
   var status = Rxn<AttendanceStatusResponse>();
   var history = <AttendanceHistoryData>[].obs;
-
   var isLoading = false.obs;
 
   @override
   void onInit() {
     super.onInit();
-    fetchStatus();
-    fetchHistory();
+    loadData();
   }
 
   Future<void> fetchStatus() async {
-    isLoading.value = true;
-    final result = await AttendanceService.getStatus();
+    final result = await AttendanceService.fetchCurrentStatus();
     status.value = result;
-    isLoading.value = false;
   }
 
-Future<void> fetchHistory() async {
-  isLoading.value = true;
-  final now = DateTime.now();
-  final start = now.subtract(const Duration(days: 6));
-  final historyResult = await AttendanceService.getHistory(
-    startDate: DateFormat('yyyy-MM-dd').format(start),
-    endDate: DateFormat('yyyy-MM-dd').format(now),
-  );
-  history.assignAll(historyResult); // giờ đã đúng kiểu List<>
-  isLoading.value = false;
-}
-
+  Future<void> fetchHistory() async {
+    final now = DateTime.now();
+    final start = now.subtract(const Duration(days: 6));
+    final historyResult = await AttendanceService.fetchHistory(
+      startDate: DateFormat('yyyy-MM-dd').format(start),
+      endDate: DateFormat('yyyy-MM-dd').format(now),
+    );
+    history.assignAll(historyResult);
+  }
 
   Future<void> checkIn() async {
-    await AttendanceService.checkIn();
-    await fetchStatus();
-    await fetchHistory();
+    try {
+      await AttendanceService.checkIn();
+      await loadData();
+    } catch (e) {
+      Get.snackbar('Lỗi', 'Chấm công thất bại: $e', snackPosition: SnackPosition.BOTTOM);
+    }
   }
 
   Future<void> checkOut() async {
     await AttendanceService.checkOut();
+    await loadData();
+  }
+
+  Future<void> loadData() async {
+    isLoading.value = true;
     await fetchStatus();
     await fetchHistory();
+    isLoading.value = false;
   }
 }
