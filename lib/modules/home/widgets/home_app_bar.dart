@@ -40,7 +40,7 @@ class HomeAppBar extends StatelessWidget {
                     const SizedBox(width: 10),
                     const Expanded(
                       child: Text(
-                        "Chào buổi sáng !!!",
+                        "Good Morning !!!",
                         style: TextStyle(fontSize: 16),
                         overflow: TextOverflow.ellipsis,
                       ),

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../task/task_controller.dart';  
-import 'home_section.dart';
+import '../../task/task_controller.dart';
 
-class HomeTaskList extends GetView<TaskController> { 
+class HomeTaskList extends GetView<TaskController> {
   const HomeTaskList({super.key});
 
   Color _priorityColor(String level) {
     switch (level) {
-      case 'Cao':
+      case 'High':
         return Colors.red;
-      case 'Trung bình':
+      case 'Medium':
         return Colors.orange;
-      case 'Thấp':
+      case 'Easy':
         return Colors.grey.shade400;
       default:
         return Colors.grey;
@@ -21,11 +20,11 @@ class HomeTaskList extends GetView<TaskController> {
 
   Color _statusColor(String status) {
     switch (status) {
-      case 'Cần làm':
+      case 'To Do':
         return Colors.red;
-      case 'Trong tiến trình':
+      case 'In Progress':
         return Colors.orange.shade200;
-      case 'Đang review':
+      case 'Reviewing':
         return Colors.blue;
       default:
         return Colors.grey.shade100;
@@ -35,17 +34,34 @@ class HomeTaskList extends GetView<TaskController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final tasks = controller.tasks; // ✅ Lấy từ TaskController
+      final tasks = controller.tasks;
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionTitle(
-            title: "Today's Work",
-            actionText: "Tất cả (${tasks.length})",
-            onAction: () {},
+          // Title with action
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                const Text(
+                  "Today's Tasks",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                const Spacer(),
+                Text(
+                  "All (${tasks.length})",
+                  style: const TextStyle(
+                      color: Colors.blue,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
           ),
           const SizedBox(height: 12),
+
+          // Task List
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
@@ -53,7 +69,10 @@ class HomeTaskList extends GetView<TaskController> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: const [
                 BoxShadow(
-                    color: Colors.black12, blurRadius: 6, offset: Offset(0, 2))
+                  color: Colors.black12,
+                  blurRadius: 6,
+                  offset: Offset(0, 2),
+                )
               ],
             ),
             child: ListView.separated(
@@ -69,44 +88,71 @@ class HomeTaskList extends GetView<TaskController> {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Row(
                     children: [
+                      // Priority label - Left
                       Container(
-                        constraints: const BoxConstraints(minWidth: 60),
-                        alignment: Alignment.center,
+                        constraints:
+                            const BoxConstraints(minWidth: 60, minHeight: 28),
+                        alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: _priorityColor(task.priority),
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                        child: Text(task.priority,
-                            style: const TextStyle(fontSize: 12)),
+                        child: Text(
+                          task.priority,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
+
                       const SizedBox(width: 12),
+
+                      // Title and Project - Center
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(task.title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500)),
-                            Text(task.project,
-                                style: const TextStyle(color: Colors.grey)),
+                            Text(
+                              task.title,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w500),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              task.project,
+                              style: const TextStyle(color: Colors.grey),
+                              textAlign: TextAlign.center,
+                            ),
                           ],
                         ),
                       ),
-                      const SizedBox(width: 8),
+
+                      const SizedBox(width: 12),
+
+                      // Status label - Right
                       Container(
-                        constraints: const BoxConstraints(minWidth: 80),
-                        alignment: Alignment.center,
+                        constraints:
+                            const BoxConstraints(minWidth: 80, minHeight: 28),
+                        alignment: Alignment.centerRight,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
                           color: _statusColor(task.status),
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(6),
                         ),
-                        child: Text(task.status,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 12)),
+                        child: Text(
+                          task.status,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
