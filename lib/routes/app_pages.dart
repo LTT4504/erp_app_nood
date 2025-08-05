@@ -2,8 +2,6 @@ import 'package:get/get.dart';
 import '../modules/attendance/widgets/attendance.dart';
 import '../modules/auth/auth_binding.dart';
 import '../modules/auth/auth_view.dart';
-import '../modules/dashboard/dashboard_binding.dart';
-import '../modules/dashboard/dashboard_view.dart';
 import '../modules/home/home.dart';
 import '../modules/forgot_password/forgot_password_screen.dart';
 import '../modules/forgot_password/forgot_password_binding.dart';
