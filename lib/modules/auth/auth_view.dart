@@ -135,11 +135,7 @@ class AuthView extends GetView<AuthController> {
                       // Login Button
                       CustomButton(
                         label: "Login",
-                        onPressed: () {
-                          if (controller.formKey.currentState!.validate()) {
-                            controller.login();
-                          }
-                        },
+                        onPressed: controller.login,
                       ),
                     ],
                   ),

@@ -6,7 +6,6 @@ import '../modules/home/home.dart';
 import '../modules/forgot_password/forgot_password_screen.dart';
 import '../modules/forgot_password/forgot_password_binding.dart';
 import '../modules/forgot_password/sent_email_success.dart';
-
 import '../modules/intro/splash_screen.dart';
 import 'app_routes.dart';
 
@@ -30,17 +29,15 @@ class AppPages {
     GetPage(
       name: AppRoutes.emailSentSuccess,
       page: () => const SentEmailSuccessScreen(),
-   
     ),
     GetPage(
-  name: AppRoutes.splash,
-  page: () => const SplashScreen(),
-),
-GetPage(
-  name: AppRoutes.attendance,
-  page: () => const AttendanceScreen(),
-  binding: AttendanceBindings(),
-),
-
+      name: AppRoutes.splash,
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.attendance,
+      page: () => const AttendanceScreen(),
+      binding: AttendanceBindings(),
+    ),
   ];
 }
