@@ -15,7 +15,6 @@ class AttendanceService {
       final response = await _dio.get(ApiConstant.attendanceStatus);
       log.i('Trạng thái hiện tại: ${response.data}');
 
-      // Kiểm tra response (dùng trường 'success' và 'data' chữ thường)
       if (response.statusCode == 200 && response.data['success'] == true) {
         final data = response.data['data'];
         return AttendanceStatusResponse.fromJson(data);
@@ -49,12 +48,10 @@ class AttendanceService {
 
       if (response.statusCode == 200 && response.data['success'] == true) {
         final data = response.data['data'];
-        if (data is List) {
-          return data.map((e) => AttendanceHistoryData.fromJson(e)).toList();
-        } else {
-          log.w('Dữ liệu lịch sử không đúng định dạng');
-          return [];
-        }
+        final list = data != null && data['historyAttendanceCurrentUser'] is List
+            ? data['historyAttendanceCurrentUser'] as List
+            : [];
+        return list.map((e) => AttendanceHistoryData.fromJson(e)).toList();
       } else {
         final message = response.data['message'] ?? 'Lỗi không xác định';
         throw Exception(message);

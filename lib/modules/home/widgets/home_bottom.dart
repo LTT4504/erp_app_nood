@@ -11,12 +11,12 @@ class HomeBottomNav extends StatelessWidget {
     required this.onTap,
   });
 
-  Widget _buildIcon(IconData icon, bool isActive) {
+  Widget _buildIcon(IconData icon, bool isActive, double iconSize) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.all(iconSize * 0.23),
       child: Icon(
         icon,
-        size: 35,
+        size: iconSize,
         color: isActive ? ColorConstants.highlightPrimary : ColorConstants.darkGray,
       ),
     );
@@ -24,17 +24,23 @@ class HomeBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
+    final width = mq.size.width;
+    final height = mq.size.height;
+    final navHeight = (height * 0.11).clamp(60.0, 90.0); 
+    final iconSize = (width * 0.08).clamp(26.0, 35.0); 
+    final borderRadius = BorderRadius.only(
+      topLeft: Radius.circular(width * 0.05),
+      topRight: Radius.circular(width * 0.05),
+    );
     return Container(
-      height: 75,
+      height: navHeight,
       decoration: BoxDecoration(
         color: ColorConstants.white,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
+        borderRadius: borderRadius,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
+            color: Colors.black.withOpacity(0.08),
             blurRadius: 10,
             spreadRadius: 0,
             offset: const Offset(0, -5),
@@ -55,7 +61,7 @@ class HomeBottomNav extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: _buildIcon(Icons.home_rounded, currentIndex == 0),
+            icon: _buildIcon(Icons.home_rounded, currentIndex == 0, iconSize),
             label: '',
           ),
           // BottomNavigationBarItem(
@@ -67,7 +73,7 @@ class HomeBottomNav extends StatelessWidget {
           //   label: '',
           // ),
           BottomNavigationBarItem(
-            icon: _buildIcon(Icons.menu_rounded, currentIndex == 3),
+            icon: _buildIcon(Icons.menu_rounded, currentIndex == 3, iconSize),
             label: '',
           ),
         ],

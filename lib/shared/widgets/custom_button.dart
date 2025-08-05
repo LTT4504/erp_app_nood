@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
     final buttonColor = backgroundColor ?? ColorConstants.highlightPrimary;
 
     return Opacity(
-      opacity: enabled ? 1.0 : 0.5,
+      opacity: enabled ? 1.0 : 1.0,
       child: SizedBox(
         width: double.infinity,
         height: 48,
