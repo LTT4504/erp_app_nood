@@ -7,6 +7,7 @@ class ColorConstants {
   static const Color darkGray = Color(0xFF9F9F9F);
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color red = Color.fromARGB(255, 196, 14, 14);
 
   // Highlight Colors
   static const Color highlightPrimary = Color(0xFF349A13);

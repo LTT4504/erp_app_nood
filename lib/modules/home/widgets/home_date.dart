@@ -53,7 +53,7 @@ class _HomeDateState extends State<HomeDate> {
       _formattedDate,
       style: const TextStyle(
         color: ColorConstants.highlightPrimary,
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
     );

@@ -5,4 +5,5 @@ abstract class AppRoutes {
   static const emailSentSuccess = '/email-sent-success';
   static const splash = '/splash';
   static const attendance = '/attendance';
+  static const dashboard = '/dashboard';
 }
