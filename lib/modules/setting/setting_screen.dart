@@ -5,8 +5,8 @@ import '../../shared/services/token_storage.dart';
 import '../../routes/routes.dart';
 import '../../shared/constants/colors.dart';
 
-class HomeMenuTab extends StatelessWidget {
-  const HomeMenuTab({super.key});
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
 
   Future<void> _logout() async {
     await TokenStorage.logout();
