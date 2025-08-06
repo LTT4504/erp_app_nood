@@ -1,33 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../task/task_controller.dart';
+import '../../../lang/app_language_key.dart';
 
 class HomeTaskList extends GetView<TaskController> {
   const HomeTaskList({super.key});
 
   Color _priorityColor(String level) {
-    switch (level) {
-      case 'High':
-        return Colors.red;
-      case 'Medium':
-        return Colors.orange;
-      case 'Easy':
-        return Colors.grey.shade400;
-      default:
-        return Colors.grey;
+    if (level == 'High' || level == 'Cao' || level == AppLanguageKey.high.tr) {
+      return Colors.red;
+    } else if (level == 'Medium' ||
+        level == 'Trung bình' ||
+        level == AppLanguageKey.medium.tr) {
+      return Colors.orange;
+    } else if (level == 'Easy' ||
+        level == 'Dễ' ||
+        level == AppLanguageKey.easy.tr) {
+      return Colors.grey.shade400;
+    } else {
+      return Colors.grey;
     }
   }
 
   Color _statusColor(String status) {
-    switch (status) {
-      case 'To Do':
-        return Colors.red;
-      case 'In Progress':
-        return Colors.orange.shade200;
-      case 'Reviewing':
-        return Colors.blue;
-      default:
-        return Colors.grey.shade100;
+    if (status == 'To Do' ||
+        status == 'Chưa làm' ||
+        status == AppLanguageKey.toDo.tr) {
+      return Colors.red;
+    } else if (status == 'In Progress' ||
+        status == 'Đang tiến hành' ||
+        status == AppLanguageKey.inProgress.tr) {
+      return Colors.orange.shade200;
+    } else if (status == 'Reviewing' ||
+        status == 'Đang xem xét' ||
+        status == AppLanguageKey.reviewing.tr) {
+      return Colors.blue;
+    } else {
+      return Colors.grey.shade100;
     }
   }
 
@@ -43,19 +52,23 @@ class HomeTaskList extends GetView<TaskController> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  "Today's Tasks",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  AppLanguageKey.todaysTasks,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-                const Spacer(),
                 Text(
-                  "All (${tasks.length})",
+                  '${AppLanguageKey.all} (${tasks.length})',
                   style: const TextStyle(
-                      color: Colors.blue,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                )
+                    color: Colors.blue,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ],
             ),
           ),
@@ -88,11 +101,11 @@ class HomeTaskList extends GetView<TaskController> {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   child: Row(
                     children: [
-                      // Priority label - Left
+                      // Priority label
                       Container(
                         constraints:
                             const BoxConstraints(minWidth: 60, minHeight: 28),
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.center,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
@@ -100,7 +113,7 @@ class HomeTaskList extends GetView<TaskController> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          task.priority,
+                          task.priority.tr, // ✅ translate priority
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -111,19 +124,19 @@ class HomeTaskList extends GetView<TaskController> {
 
                       const SizedBox(width: 12),
 
-                      // Title and Project - Center
+                      // Title and Project
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              task.title,
+                              task.title.tr,
                               style:
                                   const TextStyle(fontWeight: FontWeight.w500),
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              task.project,
+                              task.project.tr,
                               style: const TextStyle(color: Colors.grey),
                               textAlign: TextAlign.center,
                             ),
@@ -133,11 +146,11 @@ class HomeTaskList extends GetView<TaskController> {
 
                       const SizedBox(width: 12),
 
-                      // Status label - Right
+                      // Status label
                       Container(
                         constraints:
                             const BoxConstraints(minWidth: 80, minHeight: 28),
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.center,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
                         decoration: BoxDecoration(
@@ -145,7 +158,7 @@ class HomeTaskList extends GetView<TaskController> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          task.status,
+                          task.status.tr, // ✅ translate status
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,

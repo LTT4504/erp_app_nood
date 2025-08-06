@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:work_manager/shared/shared.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomeAppBar extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center, 
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Container(
@@ -25,7 +26,9 @@ class HomeAppBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4)],
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, blurRadius: 4)
+                  ],
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
@@ -38,10 +41,10 @@ class HomeAppBar extends StatelessWidget {
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(width: 10),
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        "Good Morning !!!",
-                        style: TextStyle(fontSize: 16),
+                        'good_morning'.tr,
+                        style: const TextStyle(fontSize: 16),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -49,13 +52,9 @@ class HomeAppBar extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(width: 12),
-
             const Icon(Icons.notifications, color: Colors.white, size: 26),
-
             const SizedBox(width: 12),
-
             ClipOval(
               child: Image.asset(
                 'assets/images/avatar_default.png',
