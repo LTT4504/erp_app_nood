@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../modules/attendance/attendance_history_screen.dart';
 import '../modules/attendance/widgets/attendance.dart';
 import '../modules/auth/auth_binding.dart';
 import '../modules/auth/auth_view.dart';
@@ -39,10 +40,10 @@ class AppPages {
       page: () => const AttendanceScreen(),
       binding: AttendanceBindings(),
     ),
-    // GetPage(
-    //   name: '/',
-    //   page: () => const DashboardView(),
-    //   binding: DashboardBinding(),
-    // ),
+    GetPage(
+  name: '/attendance-history',
+  page: () => const AttendanceHistoryScreen(),
+),
+
   ];
 }

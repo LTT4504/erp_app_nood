@@ -5,6 +5,15 @@ import '../../../models/model/response/attendance/attendance_status_response/att
 import '../../../shared/services/attendance_service.dart';
 
 class AttendanceController extends GetxController {
+  Future<void> fetchHistoryByRange(DateTime from, DateTime to) async {
+    isLoading.value = true;
+    final historyResult = await AttendanceService.fetchHistory(
+      startDate: DateFormat('yyyy-MM-dd').format(from),
+      endDate: DateFormat('yyyy-MM-dd').format(to),
+    );
+    history.assignAll(historyResult);
+    isLoading.value = false;
+  }
   var status = Rxn<AttendanceStatusResponse>();
   var history = <AttendanceHistoryData>[].obs;
   var isLoading = false.obs;

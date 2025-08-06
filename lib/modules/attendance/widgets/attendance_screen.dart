@@ -24,13 +24,13 @@ class AttendanceScreen extends GetView<AttendanceController> {
         }
 
         final status = controller.status.value;
-       
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // CURRENT STATUS CARD
               Card(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 color: Colors.white,
@@ -48,7 +48,6 @@ class AttendanceScreen extends GetView<AttendanceController> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      
                       const SizedBox(height: 12),
                       if (status == null)
                         const SizedBox.shrink()
@@ -56,6 +55,7 @@ class AttendanceScreen extends GetView<AttendanceController> {
                         CustomButton(
                           label: 'Check In',
                           icon: Icons.login,
+                          backgroundColor: const Color.fromARGB(255, 75, 187, 235),
                           onPressed: () async {
                             await controller.checkIn();
                           },
@@ -73,19 +73,32 @@ class AttendanceScreen extends GetView<AttendanceController> {
                         CustomButton(
                           label: 'Checked Out',
                           icon: Icons.check_circle,
-                          backgroundColor:  Colors.redAccent,
+                          backgroundColor: Colors.redAccent,
                           onPressed: () {},
                           enabled: false,
                         ),
-                        
                     ],
                   ),
                 ),
               ),
 
-              const Text(
-                'Recent History (Last 7 Days)',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Recent History (Last 7 Days)',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Get.toNamed('/attendance-history'); 
+                    },
+                    child: const Text(
+                      'All',
+                      style: TextStyle(fontSize: 16,color: ColorConstants.highlightPrimary, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
 
@@ -111,5 +124,4 @@ class AttendanceScreen extends GetView<AttendanceController> {
       }),
     );
   }
-
 }
