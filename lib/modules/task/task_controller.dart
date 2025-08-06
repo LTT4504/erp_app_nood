@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import 'model/task_model.dart';
 
 class TaskController extends GetxController {
@@ -12,11 +13,31 @@ class TaskController extends GetxController {
 
   void loadTasks() {
     tasks.assignAll([
-      Task(priority: "High", title: "Background color is wrong", project: "Project A", status: "To Do"),
-      Task(priority: "Medium", title: "Data synchronization error", project: "Project B", status: "In Progress"),
-      Task(priority: "Medium", title: "Update date time", project: "Project C", status: "To Do"),
-      Task(priority: "Easy", title: "Add Japanese language", project: "Project D", status: "Reviewing"),
-      Task(priority: "Easy", title: "Wrong icon", project: "Project D", status: "In Progress"),
+      Task(
+          priority: 'high',
+          title: 'task_bg_wrong',
+          project: 'project_a',
+          status: 'to_do'),
+      Task(
+          priority: 'medium',
+          title: 'task_sync_error',
+          project: 'project_b',
+          status: 'in_progress'),
+      Task(
+          priority: 'medium',
+          title: 'task_update_time',
+          project: 'project_c',
+          status: 'to_do'),
+      Task(
+          priority: 'easy',
+          title: 'task_add_japanese',
+          project: 'project_d',
+          status: 'reviewing'),
+      Task(
+          priority: 'easy',
+          title: 'task_wrong_icon',
+          project: 'project_d',
+          status: 'in_progress'),
     ]);
   }
 }
