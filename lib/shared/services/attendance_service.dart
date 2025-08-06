@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 import '../../api/api_client.dart';
 import '../../api/api_constant.dart';
 import '../../models/model/response/attendance/attendance_status_response/attendance_status_response.dart';
@@ -29,17 +30,21 @@ class AttendanceService {
   }
 
   static Future<List<AttendanceHistoryData>> fetchHistory({
-    required String startDate,
-    required String endDate,
+    String? startDate,
+    String? endDate,
     int pageNumber = 1,
-    int pageSize = 7,
+    int pageSize = 30,
   }) async {
     try {
+      // Nếu không truyền startDate/endDate thì lấy 30 ngày gần nhất
+      final now = DateTime.now();
+      final start = startDate ?? DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 29)));
+      final end = endDate ?? DateFormat('yyyy-MM-dd').format(now);
       final response = await _dio.get(
         ApiConstant.attendanceHistory,
         queryParameters: {
-          'StartDate': startDate,
-          'EndDate': endDate,
+          'StartDate': start,
+          'EndDate': end,
           'PageNumber': pageNumber,
           'PageSize': pageSize,
         },

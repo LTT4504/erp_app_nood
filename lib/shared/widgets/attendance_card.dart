@@ -18,12 +18,11 @@ class AttendanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final formattedDate = _formatDate(date);
+    final formattedDate = _formatDateWithWeekday(date);
     final formattedCheckIn = _formatTime(checkIn);
     final formattedCheckOut = _formatTime(checkOut);
 
     return InkWell(
-      onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
@@ -33,13 +32,12 @@ class AttendanceCard extends StatelessWidget {
               ? theme.colorScheme.surface
               : Colors.white,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            if (theme.brightness == Brightness.light)
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
+         boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha:  0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
           ],
         ),
         child: Column(
@@ -102,16 +100,27 @@ class AttendanceCard extends StatelessWidget {
     }
   }
 
-  String _formatDate(String? date) {
+  String _formatDateWithWeekday(String? date) {
     if (date == null || date.isEmpty) return '-';
     try {
       final dt = DateTime.parse(date);
-      return DateFormat('dd/MM/yyyy').format(dt);
+      final weekday = _weekdayEn(dt.weekday);
+      final formatted = DateFormat('dd/MM/yyyy').format(dt);
+      return '$weekday, $formatted';
     } catch (_) {
       if (date.contains('T')) {
-        return date.split('T')[0].split('-').reversed.join('/');
+        final parts = date.split('T')[0].split('-');
+        final formatted = parts.reversed.join('/');
+        return formatted;
       }
       return date;
     }
+  }
+
+  String _weekdayEn(int weekday) {
+    const weekdays = [
+      'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+    ];
+    return weekdays[(weekday - 1) % 7];
   }
 }
