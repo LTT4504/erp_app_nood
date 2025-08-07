@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_manager/modules/home/home_controller.dart';
 import 'package:work_manager/modules/home/widgets/home_bottom.dart';
-
+import '../my_task/my_task_screen.dart';
 import '../setting/setting_screen.dart';
 import 'home_main_screen.dart';
 
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             index: controller.currentTab,
             children: const [
               HomeMainScreen(),    // Tab 0
-              // HomeEventScreen(),   // Tab 1
+              MyTaskScreen(), // Tab 1
               // HomeTaskScreen(),    // Tab 2
               SettingScreen(),     // Tab 3
             ],

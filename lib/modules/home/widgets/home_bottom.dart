@@ -64,10 +64,10 @@ class HomeBottomNav extends StatelessWidget {
             icon: _buildIcon(Icons.home_rounded, currentIndex == 0, iconSize),
             label: '',
           ),
-          // BottomNavigationBarItem(
-          //   icon: _buildIcon(Icons.event_note_rounded, currentIndex == 1),
-          //   label: '',
-          // ),
+          BottomNavigationBarItem(
+            icon: _buildIcon(Icons.event_note_rounded, currentIndex == 1, iconSize),
+            label: '',
+          ),
           // BottomNavigationBarItem(
           //   icon: _buildIcon(Icons.task_rounded, currentIndex == 2),
           //   label: '',

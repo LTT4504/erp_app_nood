@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import '../modules/attendance/attendance_history_screen.dart';
+import '../modules/my_task/my_task_screen.dart';
+import '../modules/my_task/my_task_binding.dart';
 import '../modules/attendance/widgets/attendance.dart';
 import '../modules/auth/auth_binding.dart';
 import '../modules/auth/auth_view.dart';
@@ -41,9 +43,14 @@ class AppPages {
       binding: AttendanceBindings(),
     ),
     GetPage(
-  name: '/attendance-history',
-  page: () => const AttendanceHistoryScreen(),
-),
-
+      name: AppRoutes.attendanceHistory,
+      page: () => const AttendanceHistoryScreen(),
+    ),
+    // Thêm route cho màn hình MyTask
+     GetPage(
+      name: AppRoutes.myTask,
+      page: () => MyTaskScreen(),
+      binding: MyTaskBinding(),
+    ),
   ];
 }

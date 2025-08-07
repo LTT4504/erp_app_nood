@@ -6,4 +6,6 @@ abstract class AppRoutes {
   static const splash = '/splash';
   static const attendance = '/attendance';
   static const dashboard = '/dashboard';
+  static const attendanceHistory = '/attendance-history';
+  static const myTask = '/my-task';
 }
