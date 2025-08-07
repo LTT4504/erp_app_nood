@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:work_manager/shared/constants/colors.dart';
 
 import '../../../shared/controller/locate_controller.dart';
 
@@ -20,7 +21,7 @@ class HomeDate extends StatelessWidget {
       return Text(
         "$weekday, $formatted",
         style: const TextStyle(
-          color: Colors.green,
+          color:ColorConstants.highlightPrimary,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

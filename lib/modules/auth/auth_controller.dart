@@ -53,7 +53,10 @@ class AuthController extends GetxController {
         password: password,
         rememberMe: rememberMe.value,
       );
-      if (response.status == 200 && response.success) {
+      if ([400, 401, 403, 404].contains(response.status)) {
+        String msg = response.message.isNotEmpty ? response.message : 'Sai tài khoản hoặc mật khẩu';
+        Get.snackbar('Lỗiiiii đăng nhập', msg);
+      } else if (response.status == 200 && response.success == true) {
         await TokenStorage.saveAccessToken(response.data.accessToken);
         await TokenStorage.saveRefreshToken(response.data.refreshToken);
 
@@ -65,15 +68,17 @@ class AuthController extends GetxController {
           await storage.remove('password');
         }
 
-        // ✅ Chuyển màn hình chính, AuthController có thể bị xoá → dùng fenix
         Get.offAllNamed(AppRoutes.home);
+      } else {
+        String msg = response.message.isNotEmpty ? response.message : 'Đăng nhập thất bại';
+        Get.snackbar('Lỗiaaa đăng nhập', msg);
       }
     } catch (e) {
       if (e is DioException) {
-        final msg = e.response?.data['message'] ?? 'Đăng nhập thất bại';
-        Get.snackbar('Lỗi đăng nhập', msg.toString());
+        String msg = e.response?.data['message']?.toString() ?? 'Sai tài khoản hoặc mật khẩu';
+        Get.snackbar('Lỗi000000 đăng nhập', msg);
       } else {
-        Get.snackbar('Lỗi', e.toString());
+        Get.snackbar('Lỗi hệ thống', 'Có lỗi xảy ra, vui lòng thử lại sau.');
       }
     }
   }

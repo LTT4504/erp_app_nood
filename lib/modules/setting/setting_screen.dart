@@ -16,21 +16,23 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 24), // ✅ Dịch toàn bộ xuống
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          children: [
-            // ✅ Thông tin user
-            Container(
-              padding: const EdgeInsets.all(20),
+    return Scaffold(
+      backgroundColor: ColorConstants.highlightPrimaryPastel,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 24), // ✅ Dịch toàn bộ xuống
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            children: [
+              // ✅ Thông tin user
+              Container(
+              padding: const EdgeInsets.all(40),
               decoration: BoxDecoration(
                 color: ColorConstants.highlightPrimary,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: ColorConstants.highlightPrimary.withOpacity(0.3),
+                    color: ColorConstants.highlightPrimary.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   )
@@ -197,6 +199,7 @@ class SettingScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    )
+    ); 
   }
 }
