@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_manager/shared/constants/colors.dart';
+import '../../lang/app_language_key.dart';
 import 'my_leave_controller.dart';
 import 'widgets/leave_card.dart';
 import 'widgets/add_leave_dialog.dart';
@@ -9,7 +10,6 @@ import 'widgets/stat_card.dart';
 
 class LeaveScreen extends StatelessWidget {
   LeaveScreen({super.key});
-
   final LeaveController controller = Get.put(LeaveController());
 
   @override
@@ -18,108 +18,75 @@ class LeaveScreen extends StatelessWidget {
       backgroundColor: ColorConstants.highlightPrimaryPastel,
       appBar: AppBar(
         backgroundColor: ColorConstants.highlightPrimary,
-        title: const Text("Nghỉ phép của tôi", style: TextStyle(color: ColorConstants.white),),
+        title: Text(AppLanguageKey.myLeave.tr, style: const TextStyle(color: ColorConstants.white)),
         centerTitle: true,
+        actions: [_languageSwitchButton()],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSearchBar(),
-            const SizedBox(height: 16),
-            _buildStatGrid(),
-            const SizedBox(height: 16),
-            const Text(
-              "Đơn nghỉ phép gần đây",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Obx(() => Column(
-              children: controller.leaveRequests.asMap().entries.map((entry) {
-                int index = entry.key;
-                var item = entry.value;
-                return GestureDetector(
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (_) => EditLeaveDialog(
-                        index: index,
-                        leave: item,
-                      ),
-                    );
-                  },
-                  child: LeaveCard(
-                    title: item["title"],
-                    date: item["date"],
-                    status: item["status"],
-                    statusColor: controller.getStatusColor(item["status"]),
-                    reason: item["reason"],
-                    days: item["days"],
-                  ),
-                );
-              }).toList(),
-            )),
-          ],
-        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          _buildSearchBar(),
+          const SizedBox(height: 16),
+          _buildStatGrid(),
+          const SizedBox(height: 16),
+          Text(AppLanguageKey.recentLeaveApplications.tr, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          Obx(() => Column(
+                children: controller.leaveRequests.asMap().entries.map((e) {
+                  final idx = e.key;
+                  final leave = e.value;
+                  return GestureDetector(
+                    onTap: () => showDialog(context: context, builder: (_) => EditLeaveDialog(index: idx, leave: leave)),
+                    child: LeaveCard(leave: leave, statusColor: controller.getStatusColor(leave.status)),
+                  );
+                }).toList(),
+              )),
+        ]),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorConstants.green,
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (_) => AddLeaveDialog(),
-          );
-        },
+        onPressed: () => showDialog(context: context, builder: (_) => const AddLeaveDialog()),
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  Widget _buildSearchBar() {
-    return Row(
-      children: [
+  Widget _buildSearchBar() => Row(children: [
         Expanded(
           child: TextField(
             decoration: InputDecoration(
-              hintText: "Tìm kiếm...",
+              hintText: AppLanguageKey.search.tr,
               prefixIcon: const Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
               filled: true,
               fillColor: Colors.white,
             ),
           ),
         ),
         const SizedBox(width: 8),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: const Icon(Icons.format_list_bulleted),
-        )
-      ],
-    );
-  }
+        Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.format_list_bulleted)),
+      ]);
 
-  Widget _buildStatGrid() {
-    return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      mainAxisSpacing: 8,
-      crossAxisSpacing: 8,
-      children: const [
-        StatCard("Nghỉ phép thường niên", "12", Icons.calendar_today, ColorConstants.green),
-        StatCard("Ngày nghỉ phép đã dùng", "3", Icons.check_circle, ColorConstants.green),
-        StatCard("Nghỉ không lương", "4", Icons.warning, ColorConstants.green),
-        StatCard("Ngày nghỉ phép còn lại", "9", Icons.hourglass_bottom, ColorConstants.green),
-      ],
-    );
-  }
+  Widget _buildStatGrid() => GridView.count(
+        crossAxisCount: 2,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        children: [
+          StatCard(AppLanguageKey.annualLeave.tr, "12", Icons.calendar_today, ColorConstants.green),
+          StatCard(AppLanguageKey.usedLeaveDays.tr, "3", Icons.check_circle, ColorConstants.green),
+          StatCard(AppLanguageKey.leaveWithoutPay.tr, "4", Icons.warning, ColorConstants.green),
+          StatCard(AppLanguageKey.remainingLeaveDays.tr, "9", Icons.hourglass_bottom, ColorConstants.green),
+        ],
+      );
+
+  Widget _languageSwitchButton() => PopupMenuButton<Locale>(
+        icon: const Icon(Icons.language, color: Colors.white),
+        onSelected: (locale) => Get.updateLocale(locale),
+        itemBuilder: (_) => const [
+          PopupMenuItem(value: Locale('en', 'US'), child: Text('English 🇺🇸')),
+          PopupMenuItem(value: Locale('vi', 'VN'), child: Text('Tiếng Việt 🇻🇳')),
+        ],
+      );
 }

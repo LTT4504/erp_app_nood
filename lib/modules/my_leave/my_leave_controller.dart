@@ -1,93 +1,79 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
+import '../../lang/app_language_key.dart';
+import 'model/leave_model.dart';
 
 class LeaveController extends GetxController {
-  var leaveRequests = <Map<String, dynamic>>[].obs;
+  final _storage = GetStorage();
+  final String _storageKey = 'leave_requests';
+  final RxList<LeaveModel> leaveRequests = <LeaveModel>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    loadSampleData();
+    loadFromStorage();
   }
 
-  /// ✅ Tải dữ liệu mẫu
+  void loadFromStorage() {
+    final data = _storage.read<List>(_storageKey);
+    if (data != null && data.isNotEmpty) {
+      leaveRequests.value = data.map((e) => LeaveModel.fromJson(Map<String, dynamic>.from(e))).toList();
+    } else {
+      loadSampleData();
+      saveToStorage();
+    }
+  }
+
+  void saveToStorage() {
+    _storage.write(_storageKey, leaveRequests.map((e) => e.toJson()).toList());
+  }
+
   void loadSampleData() {
     leaveRequests.value = [
-      {
-        "title": "Nghỉ phép thường niên",
-        "date": "25/03/2025 - 25/03/2025",
-        "status": "Hủy",
-        "statusColor": Colors.grey,
-        "reason": "Lí do cá nhân",
-        "days": "1 ngày"
-      },
-      {
-        "title": "Đi công tác",
-        "date": "28/03/2025 - 30/03/2025",
-        "status": "Đang chờ",
-        "statusColor": Colors.orange,
-        "reason": "Đi công tác",
-        "days": "3 ngày"
-      },
-      {
-        "title": "Xin phép ra ngoài",
-        "date": "25/03/2025 - 25/03/2025",
-        "status": "Đã duyệt",
-        "statusColor": Colors.green,
-        "reason": "Nghỉ ốm vì quá khỏe",
-        "days": "1 ngày"
-      },
-      {
-        "title": "Nghỉ hưởng bảo hiểm",
-        "date": "25/03/2025 - 25/03/2025",
-        "status": "Từ chối",
-        "statusColor": Colors.red,
-        "reason": "Khám bệnh",
-        "days": "1 ngày"
-      },
-      {
-        "title": "Làm từ xa",
-        "date": "25/03/2025 - 25/03/2025",
-        "status": "Mới",
-        "statusColor": Colors.blue,
-        "reason": "Dị ứng",
-        "days": "1 ngày"
-      },
+      LeaveModel(
+        title: AppLanguageKey.annualLeave,
+        date: '25/03/2025 - 25/03/2025',
+        status: AppLanguageKey.cancel,
+        statusColor: Colors.grey.value,
+        reason: AppLanguageKey.personalReasons,
+        days: '1 ${AppLanguageKey.days.tr}',
+      ),
+      // Thêm các mẫu khác...
     ];
   }
 
-  /// ✅ Thêm đơn nghỉ phép
-  void addLeave(Map<String, dynamic> leave) {
+  void addLeave(LeaveModel leave) {
     leaveRequests.add(leave);
+    saveToStorage();
   }
 
-  /// ✅ Sửa đơn nghỉ phép
-  void updateLeave(int index, Map<String, dynamic> updatedLeave) {
+  void updateLeave(int index, LeaveModel updatedLeave) {
     if (index >= 0 && index < leaveRequests.length) {
       leaveRequests[index] = updatedLeave;
       leaveRequests.refresh();
+      saveToStorage();
     }
   }
 
-  /// ✅ Xóa đơn nghỉ phép
   void deleteLeave(int index) {
     if (index >= 0 && index < leaveRequests.length) {
       leaveRequests.removeAt(index);
+      saveToStorage();
     }
   }
 
-  /// ✅ Lấy màu theo trạng thái
   Color getStatusColor(String status) {
     switch (status) {
-      case "Mới":
+      case AppLanguageKey.newLeave:
         return Colors.blue;
-      case "Đang chờ":
+      case AppLanguageKey.waiting:
         return Colors.orange;
-      case "Đã duyệt":
+      case AppLanguageKey.approved:
         return Colors.green;
-      case "Từ chối":
+      case AppLanguageKey.refuse:
         return Colors.red;
-      case "Hủy":
+      case AppLanguageKey.cancel:
         return Colors.grey;
       default:
         return Colors.black;

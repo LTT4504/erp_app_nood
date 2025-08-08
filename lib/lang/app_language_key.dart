@@ -39,4 +39,36 @@ class AppLanguageKey {
   static const String logout = 'logout';
   static const String fullName = 'full_name';
   static const String employeeId = 'employee_id';
+
+  // Leave request
+  static const String leaveRequest = 'leave_request';
+  static const String search = 'search';
+  static const String annualLeave = 'annual_leave';
+  static const String usedLeaveDays = 'used_leave_days';
+  static const String leaveWithoutPay = 'leave_without_pay';
+  static const String remainingLeaveDays = 'remaining_leave_days';
+  static const String recentLeaveApplications = 'recent_leave_applications';
+  static const String personalReasons = 'personal reasons';
+  static const String days = 'days';
+  static const String newLeave = 'new';
+  static const String cancel = 'cancel';
+  static const String erase = 'erase';
+  static const String save = 'save';
+  static const String edit = 'edit';
+  static const String editLeaveApplication = 'edit_leave_application';
+  static const String reason = 'reason';
+  static const String status = 'status';
+  static const String title = 'title';
+  static const String approved = 'approved';
+  static const String waiting = 'waiting';
+  static const String refuse = 'refuse';
+  static const String pending = 'pending';
+  static const String more = 'more';
+  static const String chooseAStartDate = 'choose_a_start_date';
+  static const String chooseAnEndDate = 'choose_an_end_date';
+  static const String addLeaveApplication = 'add_leave_application';
+  static const String myLeave = 'my_leave';
+
+  static const String missingInfo = 'missing_info';
+  static const String pleaseFillAll = 'please_fill_all';
 }
