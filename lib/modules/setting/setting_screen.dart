@@ -20,11 +20,10 @@ class SettingScreen extends StatelessWidget {
       backgroundColor: ColorConstants.highlightPrimaryPastel,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 24), // ✅ Dịch toàn bộ xuống
+          padding: const EdgeInsets.only(top: 24), 
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             children: [
-              // ✅ Thông tin user
               Container(
               padding: const EdgeInsets.all(40),
               decoration: BoxDecoration(
@@ -78,10 +77,8 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-
             const SizedBox(height: 20),
 
-            // ✅ Danh sách tùy chọn
             Container(
               decoration: BoxDecoration(
                 color: ColorConstants.white,
@@ -150,7 +147,6 @@ class SettingScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // ✅ Nút đăng xuất
             Container(
               decoration: BoxDecoration(
                 color: ColorConstants.white,
