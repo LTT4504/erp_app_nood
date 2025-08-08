@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:work_manager/shared/constants/colors.dart';
+import '../model/leave_model.dart';
 
 class LeaveCard extends StatelessWidget {
-  final String title;
-  final String date;
-  final String status;
+  final LeaveModel leave;
   final Color statusColor;
-  final String reason;
-  final String days;
 
-  const LeaveCard({
-    super.key,
-    required this.title,
-    required this.date,
-    required this.status,
-    required this.statusColor,
-    required this.reason,
-    required this.days,
-  });
+  const LeaveCard({super.key, required this.leave, required this.statusColor});
 
   @override
   Widget build(BuildContext context) {
@@ -29,53 +20,26 @@ class LeaveCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Tiêu đề + trạng thái
             Row(
               children: [
                 Expanded(
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
+                  child: Text(leave.title.tr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                 ),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    status,
-                    style: TextStyle(
-                      color: statusColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                    ),
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(color: statusColor.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+                  child: Text(leave.status.tr, style: TextStyle(color: statusColor, fontWeight: FontWeight.w500, fontSize: 12)),
                 ),
               ],
             ),
             const SizedBox(height: 4),
-            Text(
-              date,
-              style: const TextStyle(color: Colors.grey, fontSize: 12),
-            ),
-            if (reason.isNotEmpty) ...[
+            Text(leave.date, style: const TextStyle(color: ColorConstants.black, fontSize: 12)),
+            if (leave.reason.isNotEmpty) ...[
               const SizedBox(height: 4),
-              Text(
-                reason,
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
-              ),
+              Text(leave.reason.tr, style: const TextStyle(color: ColorConstants.black, fontSize: 12)),
             ],
             const SizedBox(height: 4),
-            Text(
-              days,
-              style: const TextStyle(color: Colors.green, fontSize: 12),
-            ),
+            Text(leave.days, style: const TextStyle(color: Colors.green, fontSize: 12)),
           ],
         ),
       ),
