@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import '../modules/attendance/attendance_history_screen.dart';
+import '../modules/my_leave/my_leave_binding.dart';
+import '../modules/my_leave/my_leave_screen.dart';
 import '../modules/my_task/my_task_screen.dart';
 import '../modules/my_task/my_task_binding.dart';
 import '../modules/attendance/widgets/attendance.dart';
@@ -49,8 +51,14 @@ class AppPages {
     // Thêm route cho màn hình MyTask
      GetPage(
       name: AppRoutes.myTask,
-      page: () => MyTaskScreen(),
+      page: () => const MyTaskScreen(),
       binding: MyTaskBinding(),
+    ),
+    // Thêm route cho màn hình MyLeave
+    GetPage(
+      name: AppRoutes.myLeave,
+      page: () => LeaveScreen(),
+      binding: LeaveBinding(),
     ),
   ];
 }

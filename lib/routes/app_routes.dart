@@ -8,4 +8,5 @@ abstract class AppRoutes {
   static const dashboard = '/dashboard';
   static const attendanceHistory = '/attendance-history';
   static const myTask = '/my-task';
+  static const myLeave = '/my-leave';
 }
