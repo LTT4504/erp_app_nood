@@ -88,6 +88,23 @@ const Map<String, String> vi_VN = {
   'my_leave': 'Nghỉ phép của tôi',
   'more': 'Thêm',
 
-  "missing_info": "Thiếu thông tin",
-  "please_fill_all": "Vui lòng nhập đủ dữ liệu!"
+  'missing_info': 'Thiếu thông tin',
+  'please_fill_all': 'Vui lòng nhập đủ dữ liệu!',
+
+  // Annual Calendar
+  'annual_calendar_title': 'Lịch hàng năm',
+  'mettings_schedule': 'Lịch họp',
+  'title_meeting': 'Tiêu đề cuộc họp',
+  'time_meeting': 'Thời gian họp',
+  'date_meeting': 'Ngày họp',
+  'information': 'Thông tin',
+  'picked_date': 'Ngày đã chọn',
+
+  // Thông báo
+  'personal_notifications': 'Thông báo cá nhân',
+  'leave_is_allowed': 'Được phép nghỉ phép',
+  'calendar': 'Lịch',
+  'shared': 'Chung',
+  'no_data': 'Không có dữ liệu',
+
 };

@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import '../modules/annual_calendar/annual_calendar_binding.dart';
+import '../modules/annual_calendar/annual_calendar_screen.dart';
 import '../modules/attendance/attendance_history_screen.dart';
 import '../modules/my_leave/my_leave_binding.dart';
 import '../modules/my_leave/my_leave_screen.dart';
@@ -12,6 +14,8 @@ import '../modules/forgot_password/forgot_password_screen.dart';
 import '../modules/forgot_password/forgot_password_binding.dart';
 import '../modules/forgot_password/sent_email_success.dart';
 import '../modules/intro/splash_screen.dart';
+import '../modules/notification/notification_binding.dart';
+import '../modules/notification/notification_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -49,7 +53,7 @@ class AppPages {
       page: () => const AttendanceHistoryScreen(),
     ),
     // Thêm route cho màn hình MyTask
-     GetPage(
+    GetPage(
       name: AppRoutes.myTask,
       page: () => const MyTaskScreen(),
       binding: MyTaskBinding(),
@@ -59,6 +63,18 @@ class AppPages {
       name: AppRoutes.myLeave,
       page: () => LeaveScreen(),
       binding: LeaveBinding(),
+    ),
+    // Thêm route cho màn hình AnnualCalendar
+    GetPage(
+      name: AppRoutes.annualCalendar,
+      page: () => const AnnualCalendarScreen(),
+      binding: AnnualCalendarBinding(),
+    ),
+    // Thêm route cho màn hình PersonalNotifications
+    GetPage(
+      name: AppRoutes.personalNotifications,
+      page: () => const PersonalNotificationsScreen(),
+      binding: PersonalNotificationsBinding(),
     ),
   ];
 }

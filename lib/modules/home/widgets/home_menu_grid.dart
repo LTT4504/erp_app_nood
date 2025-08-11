@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../lang/app_language_key.dart';
+import '../../../routes/app_routes.dart';
 
 class HomeMenuGrid extends StatelessWidget {
   const HomeMenuGrid({super.key});
@@ -44,6 +45,7 @@ class HomeMenuGrid extends StatelessWidget {
         'label': AppLanguageKey.annualCalendar,
         'bgColor': const Color(0xFFE3F0FA),
         'iconColor': const Color(0xFF00BCD4),
+        'route': AppRoutes.annualCalendar, 
       },
       {
         'icon': Icons.more_horiz,
