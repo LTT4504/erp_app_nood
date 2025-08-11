@@ -71,4 +71,20 @@ class AppLanguageKey {
 
   static const String missingInfo = 'missing_info';
   static const String pleaseFillAll = 'please_fill_all';
+
+  // Annual Calendar
+  static const String annualCalendarTitle = 'annual_calendar_title';
+  static const String meetingsSchedule = 'mettings_schedule';
+  static const String titleMeeting = 'title_meeting';
+  static const String timeMeeting = 'time_meeting';
+  static const String dateMeeting = 'date_meeting';
+  static const String information = 'information';
+  static const String pickedDate = 'picked_date';
+
+  // Notification
+  static const String personalNotifications = 'personal_notifications';
+  static const String leaveIsAllowed = 'leave_is_allowed';
+  static const String shared = 'shared';
+  static const String calendar = 'calendar';
+  static const String noData = 'no_data';
 }

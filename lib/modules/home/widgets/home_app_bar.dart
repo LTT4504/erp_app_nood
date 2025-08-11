@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_manager/shared/shared.dart';
 
+import '../../../routes/app_routes.dart';
+
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
@@ -53,7 +55,12 @@ class HomeAppBar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            const Icon(Icons.notifications, color: Colors.white, size: 26),
+            IconButton(
+              icon: const Icon(Icons.notifications, size: 35, color: ColorConstants.white,),
+              onPressed: () {
+                Get.toNamed(AppRoutes.personalNotifications);
+              },
+            ),
             const SizedBox(width: 12),
             ClipOval(
               child: Image.asset(

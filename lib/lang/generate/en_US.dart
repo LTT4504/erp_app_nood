@@ -88,5 +88,21 @@ const Map<String, String> en_US = {
   'more': 'More',
 
   "missing_info": "Missing Information",
-  "please_fill_all": "Please fill in all required fields!"
+  "please_fill_all": "Please fill in all required fields!",
+
+  // Annual Calendar
+  'annual_calendar_title': 'Annual Calendar',
+  'mettings_schedule': 'Meetings Schedule',
+  'title_meeting': 'Meeting Title',
+  'time_meeting': 'Meeting Time',
+  'date_meeting': 'Meeting Date',
+  'information': 'Information',
+  'picked_date': 'Picked Date',
+
+  // Notifications
+  'personal_notifications': 'Personal Notifications',
+  'leave_is_allowed': 'Leave is allowed',
+  'calendar': 'Calendar',
+  'shared': 'Shared',
+  'no_data': 'No data',
 };

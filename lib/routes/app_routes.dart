@@ -9,4 +9,6 @@ abstract class AppRoutes {
   static const attendanceHistory = '/attendance-history';
   static const myTask = '/my-task';
   static const myLeave = '/my-leave';
+  static const annualCalendar = '/annual-calendar';
+  static const personalNotifications = '/personal-notifications';
 }
