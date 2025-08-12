@@ -44,7 +44,6 @@ class AuthView extends GetView<AuthController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Title
                       const Text(
                         "Login",
                         style: TextStyle(
@@ -52,9 +51,7 @@ class AuthView extends GetView<AuthController> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-
                       const SizedBox(height: 8),
-
                       const Text(
                         "Please log in to continue.",
                         style: TextStyle(
@@ -62,8 +59,8 @@ class AuthView extends GetView<AuthController> {
                           color: Colors.black54,
                         ),
                       ),
-
                       const SizedBox(height: 24),
+
                       // Username
                       CustomTextFormField(
                         label: "Username",
@@ -78,45 +75,46 @@ class AuthView extends GetView<AuthController> {
                           return null;
                         },
                       ),
-
                       const SizedBox(height: 20),
 
                       // Password
-                      Obx(() => CustomTextFormField(
-                            label: "Password",
-                            hint: "Enter your password",
-                            icon: Icons.lock,
-                            primaryColor: ColorConstants.highlightPrimary,
-                            controller: controller.passwordController,
-                            obscureText: !controller.showPassword.value,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter your password';
-                              }
-                              return null;
-                            },
-                            suffix: IconButton(
-                              icon: Icon(
-                                controller.showPassword.value
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: ColorConstants.highlightPrimary,
-                              ),
-                              onPressed: controller.toggleShowPassword,
+                      Obx(
+                        () => CustomTextFormField(
+                          label: "Password",
+                          hint: "Enter your password",
+                          icon: Icons.lock,
+                          primaryColor: ColorConstants.highlightPrimary,
+                          controller: controller.passwordController,
+                          obscureText: !controller.showPassword.value,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                          suffix: IconButton(
+                            icon: Icon(
+                              controller.showPassword.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: ColorConstants.highlightPrimary,
                             ),
-                          )),
-
+                            onPressed: controller.toggleShowPassword,
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 12),
 
                       // Remember me & Forgot password
                       Row(
                         children: [
-                          Obx(() => Checkbox(
-                                value: controller.rememberMe.value,
-                                activeColor: ColorConstants.highlightPrimary,
-                                onChanged: (value) =>
-                                    controller.toggleRememberMe(value),
-                              )),
+                          Obx(
+                            () => Checkbox(
+                              value: controller.rememberMe.value,
+                              activeColor: ColorConstants.highlightPrimary,
+                              onChanged: controller.toggleRememberMe,
+                            ),
+                          ),
                           const Text("Remember me"),
                           const Spacer(),
                           GestureDetector(
@@ -124,12 +122,12 @@ class AuthView extends GetView<AuthController> {
                             child: const Text(
                               "Forgot Password?",
                               style: TextStyle(
-                                  color: ColorConstants.highlightPrimary),
+                                color: ColorConstants.highlightPrimary,
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
-
                       const SizedBox(height: 24),
 
                       // Login Button

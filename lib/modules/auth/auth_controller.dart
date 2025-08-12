@@ -9,8 +9,8 @@ import '../../shared/services/token_storage.dart';
 
 class AuthController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  late final TextEditingController usernameController;
+  late final TextEditingController passwordController;
 
   final showPassword = false.obs;
   final rememberMe = false.obs;
@@ -21,6 +21,9 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    usernameController = TextEditingController();
+    passwordController = TextEditingController();
+
     try {
       rememberMe.value = TokenStorage.getRememberMe();
       if (rememberMe.value) {
@@ -33,30 +36,28 @@ class AuthController extends GetxController {
     }
   }
 
-  void toggleShowPassword() {
-    showPassword.value = !showPassword.value;
-  }
+  void toggleShowPassword() => showPassword.toggle();
 
   void toggleRememberMe(bool? value) {
     rememberMe.value = value ?? false;
-    storage.write('rememberMe', rememberMe.value); // Ghi đè ngay khi thay đổi
+    storage.write('rememberMe', rememberMe.value);
   }
 
-  void login() async {
+  Future<void> login() async {
     if (!formKey.currentState!.validate()) return;
 
     final username = usernameController.text.trim();
     final password = passwordController.text;
+
     try {
       final response = await _authService.login(
         username: username,
         password: password,
         rememberMe: rememberMe.value,
       );
-      if ([400, 401, 403, 404].contains(response.status)) {
-        String msg = response.message.isNotEmpty ? response.message : 'Sai tài khoản hoặc mật khẩu';
-        Get.snackbar('Lỗiiiii đăng nhập', msg);
-      } else if (response.status == 200 && response.success == true) {
+
+      // ✅ Chỉ điều hướng khi login thành công thật sự
+      if (response.status == 200 && response.success == true) {
         await TokenStorage.saveAccessToken(response.data.accessToken);
         await TokenStorage.saveRefreshToken(response.data.refreshToken);
 
@@ -70,15 +71,27 @@ class AuthController extends GetxController {
 
         Get.offAllNamed(AppRoutes.home);
       } else {
-        String msg = response.message.isNotEmpty ? response.message : 'Đăng nhập thất bại';
-        Get.snackbar('Lỗiaaa đăng nhập', msg);
+        // ❌ Lỗi đăng nhập (API trả lỗi hoặc success = false)
+        final msg = response.message.isNotEmpty
+            ? response.message
+            : 'Sai tài khoản hoặc mật khẩu';
+        Get.snackbar('Lỗi đăng nhập', msg);
       }
     } catch (e) {
       if (e is DioException) {
-        String msg = e.response?.data['message']?.toString() ?? 'Sai tài khoản hoặc mật khẩu';
-        Get.snackbar('Lỗi000000 đăng nhập', msg);
+        var msg = 'Đăng nhập thất bại';
+        final statusCode = e.response?.statusCode;
+        if (e.response?.data?['message'] != null) {
+          msg = e.response?.data['message'] as String;
+        } else if (statusCode == 401) {
+          msg = 'Sai tài khoản hoặc mật khẩu';
+        }
+        Get.snackbar('Lỗi đăng nhập', msg);
       } else {
-        Get.snackbar('Lỗi hệ thống', 'Có lỗi xảy ra, vui lòng thử lại sau.');
+        Get.snackbar(
+          'Lỗi hệ thống',
+          'Có lỗi xảy ra, vui lòng thử lại sau.',
+        );
       }
     }
   }
@@ -87,7 +100,7 @@ class AuthController extends GetxController {
     Get.toNamed(AppRoutes.forgotPassword);
   }
 
-  void logout() async {
+  Future<void> logout() async {
     await TokenStorage.logout();
     Get.offAllNamed(AppRoutes.login);
   }
