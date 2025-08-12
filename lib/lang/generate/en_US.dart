@@ -105,4 +105,14 @@ const Map<String, String> en_US = {
   'calendar': 'Calendar',
   'shared': 'Shared',
   'no_data': 'No data',
+
+  // Additional Keys'error': 'Error',
+  'pleaseSelectDate': 'Please select start and end date',
+  'editLeave': 'Edit Leave',
+  'registerLeave': 'Register Leave',
+  'typeLeave': 'Type of Leave',
+  'insuranceLeave': 'Insurance Leave',
+  'requiredField': 'This field is required',
+  'startDate': 'Start Date',
+  'endDate': 'End Date',
 };

@@ -91,7 +91,7 @@ const Map<String, String> vi_VN = {
   'missing_info': 'Thiếu thông tin',
   'please_fill_all': 'Vui lòng nhập đủ dữ liệu!',
 
-  // Annual Calendar
+  // Lịch hàng năm
   'annual_calendar_title': 'Lịch hàng năm',
   'mettings_schedule': 'Lịch họp',
   'title_meeting': 'Tiêu đề cuộc họp',
@@ -107,4 +107,14 @@ const Map<String, String> vi_VN = {
   'shared': 'Chung',
   'no_data': 'Không có dữ liệu',
 
+  // Thêm các khóa bổ sung
+  'error': 'Lỗi',
+  'pleaseSelectDate': 'Vui lòng chọn ngày bắt đầu và kết thúc',
+  'editLeave': 'Sửa đơn nghỉ',
+  'registerLeave': 'Đăng ký nghỉ phép',
+  'typeLeave': 'Loại nghỉ phép',
+  'insuranceLeave': 'Nghỉ hưởng bảo hiểm',
+  'requiredField': 'Trường này là bắt buộc',
+  'startDate': 'Ngày bắt đầu',
+  'endDate': 'Ngày kết thúc',
 };
