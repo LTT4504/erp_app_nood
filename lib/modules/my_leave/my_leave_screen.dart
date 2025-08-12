@@ -4,9 +4,8 @@ import 'package:work_manager/shared/constants/colors.dart';
 import '../../lang/app_language_key.dart';
 import 'my_leave_controller.dart';
 import 'widgets/leave_card.dart';
-import 'widgets/add_leave_dialog.dart';
-import 'widgets/edit_leave_dialog.dart';
 import 'widgets/stat_card.dart';
+import 'widgets/leave_form.dart'; // Form mới
 
 class LeaveScreen extends StatelessWidget {
   LeaveScreen({super.key});
@@ -24,28 +23,37 @@ class LeaveScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _buildSearchBar(),
-          const SizedBox(height: 16),
-          _buildStatGrid(),
-          const SizedBox(height: 16),
-          Text(AppLanguageKey.recentLeaveApplications.tr, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          Obx(() => Column(
-                children: controller.leaveRequests.asMap().entries.map((e) {
-                  final idx = e.key;
-                  final leave = e.value;
-                  return GestureDetector(
-                    onTap: () => showDialog(context: context, builder: (_) => EditLeaveDialog(index: idx, leave: leave)),
-                    child: LeaveCard(leave: leave, statusColor: controller.getStatusColor(leave.status)),
-                  );
-                }).toList(),
-              )),
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSearchBar(),
+            const SizedBox(height: 16),
+            _buildStatGrid(),
+            const SizedBox(height: 16),
+            Text(
+              AppLanguageKey.recentLeaveApplications.tr,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Obx(() => Column(
+                  children: controller.leaveRequests.asMap().entries.map((e) {
+                    final idx = e.key;
+                    final leave = e.value;
+                    return GestureDetector(
+                      onTap: () => Get.to(() => LeaveForm(leave: leave, index: idx)),
+                      child: LeaveCard(
+                        leave: leave,
+                        statusColor: controller.getStatusColor(leave.status),
+                      ),
+                    );
+                  }).toList(),
+                )),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorConstants.green,
-        onPressed: () => showDialog(context: context, builder: (_) => const AddLeaveDialog()),
+        onPressed: () => Get.to(() => const LeaveForm()),
         child: const Icon(Icons.add),
       ),
     );
@@ -64,7 +72,12 @@ class LeaveScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        Container(height: 50, width: 50, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.format_list_bulleted)),
+        Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(12)),
+          child: const Icon(Icons.format_list_bulleted),
+        ),
       ]);
 
   Widget _buildStatGrid() => GridView.count(

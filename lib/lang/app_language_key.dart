@@ -87,4 +87,14 @@ class AppLanguageKey {
   static const String shared = 'shared';
   static const String calendar = 'calendar';
   static const String noData = 'no_data';
+
+   static const String error = 'error';
+  static const String pleaseSelectDate = 'pleaseSelectDate';
+  static const String editLeave = 'editLeave';
+  static const String registerLeave = 'registerLeave';
+  static const String typeLeave = 'typeLeave';
+  static const String insuranceLeave = 'insuranceLeave';
+  static const String requiredField = 'requiredField';
+  static const String startDate = 'startDate';
+  static const String endDate = 'endDate';
 }
