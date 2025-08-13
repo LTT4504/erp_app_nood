@@ -143,7 +143,7 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                                             100)
                                         .clamp(0.0, 1.0),
                                     backgroundColor: Colors.grey.shade300,
-                                    color: Colors.green,
+                                    color: ColorConstants.highlightPrimary,
                                     minHeight: 10,
                                   ),
                                 ),

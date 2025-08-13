@@ -12,4 +12,5 @@ abstract class AppRoutes {
   static const annualCalendar = '/annual-calendar';
   static const personalNotifications = '/personal-notifications';
   static const taskDetail = '/task-detail';
+  static const profile = '/profile';
 }
