@@ -62,12 +62,17 @@ class HomeAppBar extends StatelessWidget {
               },
             ),
             const SizedBox(width: 12),
-            ClipOval(
-              child: Image.asset(
-                'assets/images/avatar_default.png',
-                width: 36,
-                height: 36,
-                fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutes.profile);
+              },
+              child: ClipOval(
+                child: Image.asset(
+                  'assets/images/avatar_default.png',
+                  width: 36,
+                  height: 36,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ],
