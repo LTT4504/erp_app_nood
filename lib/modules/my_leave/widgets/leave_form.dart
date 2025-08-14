@@ -20,7 +20,7 @@ class _LeaveFormState extends State<LeaveForm> {
   final _formKey = GlobalKey<FormState>();
   final controller = Get.find<LeaveController>();
 
-  String? _typeLeave;
+  String? _typeLeaveKey; // lưu key gốc
   DateTime? _startDate;
   DateTime? _endDate;
   final _reasonController = TextEditingController();
@@ -29,7 +29,12 @@ class _LeaveFormState extends State<LeaveForm> {
   void initState() {
     super.initState();
     if (widget.leave != null) {
-      _typeLeave = widget.leave!.title;
+      // map từ title đã lưu sang key gốc
+      if (widget.leave!.title == AppLanguageKey.annualLeave.tr) {
+        _typeLeaveKey = AppLanguageKey.annualLeave;
+      } else if (widget.leave!.title == AppLanguageKey.insuranceLeave.tr) {
+        _typeLeaveKey = AppLanguageKey.insuranceLeave;
+      }
       _reasonController.text = widget.leave!.reason;
       _parseDateRange(widget.leave!.date);
     } else {
@@ -78,13 +83,17 @@ class _LeaveFormState extends State<LeaveForm> {
   void _saveForm() {
     if (_formKey.currentState!.validate()) {
       if (_startDate == null || _endDate == null) {
-        Get.snackbar(AppLanguageKey.error.tr, AppLanguageKey.pleaseSelectDate.tr,
-            backgroundColor: Colors.red, colorText: Colors.white);
+        Get.snackbar(
+          AppLanguageKey.error.tr,
+          AppLanguageKey.pleaseSelectDate.tr,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
         return;
       }
 
       final leave = LeaveModel(
-        title: _typeLeave!,
+        title: _typeLeaveKey!.tr, // lưu bản dịch
         date:
             '${DateFormat('dd/MM/yyyy HH:mm').format(_startDate!)} - ${DateFormat('dd/MM/yyyy HH:mm').format(_endDate!)}',
         status: AppLanguageKey.newLeave,
@@ -123,16 +132,21 @@ class _LeaveFormState extends State<LeaveForm> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: _typeLeave,
+                        value: _typeLeaveKey,
                         decoration: InputDecoration(
                           labelText: AppLanguageKey.typeLeave.tr,
                           border: const OutlineInputBorder(),
                         ),
                         items: [
-                          AppLanguageKey.annualLeave.tr,
-                          AppLanguageKey.insuranceLeave.tr,
-                        ].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-                        onChanged: (value) => setState(() => _typeLeave = value),
+                          AppLanguageKey.annualLeave,
+                          AppLanguageKey.insuranceLeave,
+                        ].map((key) {
+                          return DropdownMenuItem(
+                            value: key, // dùng key gốc
+                            child: Text(key.tr), // hiển thị bản dịch
+                          );
+                        }).toList(),
+                        onChanged: (value) => setState(() => _typeLeaveKey = value),
                         validator: (value) => value == null ? AppLanguageKey.requiredField.tr : null,
                       ),
                       const SizedBox(height: 16),

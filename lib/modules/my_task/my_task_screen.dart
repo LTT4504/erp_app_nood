@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import 'my_task_controller.dart';
 import '../../shared/constants/colors.dart';
 import 'task_card.dart';
 import '../task_detail/task_detail_binding.dart';
 import '../task_detail/task_detail_screen.dart';
 
-class MyTaskScreen extends GetView<MyTaskController> {
-  const MyTaskScreen({super.key});
+class MyTaskScreen extends StatelessWidget {
+  MyTaskScreen({super.key});
+
+  // Đảm bảo controller luôn được khởi tạo
+  final MyTaskController controller = Get.put(MyTaskController());
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MyTaskController());
+    
     return Scaffold(
       backgroundColor: ColorConstants.highlightPrimaryPastel,
       appBar: AppBar(
         backgroundColor: ColorConstants.highlightPrimary,
         elevation: 0,
-        title: const Text('My Task', style: TextStyle(color: ColorConstants.white)),
+        title: Text(
+          AppLanguageKey.myTasks.tr,
+          style: const TextStyle(color: ColorConstants.white),
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -26,7 +33,7 @@ class MyTaskScreen extends GetView<MyTaskController> {
             padding: const EdgeInsets.all(16),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Tìm kiếm công việc...',
+                hintText: AppLanguageKey.searchForJobs.tr,
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -34,7 +41,7 @@ class MyTaskScreen extends GetView<MyTaskController> {
                 filled: true,
                 fillColor: Colors.white,
               ),
-              onChanged: (value) => controller.search(value),
+              onChanged: controller.search,
             ),
           ),
           Expanded(

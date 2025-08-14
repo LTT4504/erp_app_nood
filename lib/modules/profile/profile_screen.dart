@@ -4,6 +4,7 @@ import '../../shared/constants/colors.dart';
 import '../../shared/widgets/custom_button.dart';
 import '../../shared/services/token_storage.dart';
 import '../../routes/routes.dart';
+import '../../lang/app_language_key.dart'; // Import key ngôn ngữ
 import 'profile_controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
@@ -16,9 +17,9 @@ class ProfileScreen extends GetView<ProfileController> {
       appBar: AppBar(
         backgroundColor: ColorConstants.highlightPrimary,
         elevation: 0,
-        title: const Text(
-          "Profile",
-          style: TextStyle(
+        title: Text(
+          AppLanguageKey.profile.tr, // Dùng bản dịch
+          style: const TextStyle(
             color: ColorConstants.white,
             fontWeight: FontWeight.w600,
             fontSize: 20,
@@ -73,11 +74,11 @@ class ProfileScreen extends GetView<ProfileController> {
             ),
           ),
           const SizedBox(height: 24),
-          _buildMenuItem(Icons.person_outline, "General Information"),
-          _buildMenuItem(Icons.phone_android, "Emergency Contact"),
-          _buildMenuItem(Icons.school_outlined, "Education"),
-          _buildMenuItem(Icons.work_outline, "Position"),
-          _buildMenuItem(Icons.account_balance_outlined, "Bank & Salary"),
+          _buildMenuItem(Icons.person_outline, AppLanguageKey.generalInformation.tr),
+          _buildMenuItem(Icons.phone_android, AppLanguageKey.emergencyContact.tr),
+          _buildMenuItem(Icons.school_outlined, AppLanguageKey.education.tr),
+          _buildMenuItem(Icons.work_outline, AppLanguageKey.position.tr),
+          _buildMenuItem(Icons.account_balance_outlined, AppLanguageKey.bankAndSalary.tr),
           const SizedBox(height: 20),
           _buildLogoutButton(),
         ],
@@ -119,7 +120,7 @@ class ProfileScreen extends GetView<ProfileController> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: CustomButton(
-        label: "Logout",
+        label: AppLanguageKey.logout.tr, 
         icon: Icons.logout,
         backgroundColor: ColorConstants.red,
         onPressed: () async {
