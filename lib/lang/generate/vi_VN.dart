@@ -87,9 +87,17 @@ const Map<String, String> vi_VN = {
   'add_leave_application': 'Thêm đơn xin nghỉ',
   'my_leave': 'Nghỉ phép của tôi',
   'more': 'Thêm',
+  'insurance_leave': 'Nghỉ phép bảo hiểm',
 
   'missing_info': 'Thiếu thông tin',
   'please_fill_all': 'Vui lòng nhập đủ dữ liệu!',
+
+  'filter': 'Lọc',
+  'type leave': 'Nghỉ phép',
+  'from date': 'Từ ngày',
+  'to date': 'Đến ngày',
+  'apply': 'Áp dụng',
+  'options': 'Tùy chọn',
 
   // Lịch hàng năm
   'annual_calendar_title': 'Lịch hàng năm',
@@ -117,4 +125,19 @@ const Map<String, String> vi_VN = {
   'requiredField': 'Trường này là bắt buộc',
   'startDate': 'Ngày bắt đầu',
   'endDate': 'Ngày kết thúc',
+
+  // Hồ sơ
+  'profile': 'Hồ sơ',
+  'general_information': 'Thông tin chung',
+  'education': 'Giáo dục',
+  'emergency_contact': 'Liên hệ khẩn cấp',
+  'position': 'Vị trí',
+  'bank & salary': 'Ngân hàng & Lương',
+
+  // Nhiệm vụ
+  'search_for_jobs': 'Tìm kiếm công việc...',
+  'interface_design': 'Thiết kế giao diện',
+  'write_api': 'Viết API',
+  'system_testing': 'Kiểm thử hệ thống',
+  'low': 'Chậm',
 };

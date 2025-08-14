@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import '../../../shared/constants/colors.dart';
 
 class TaskCard extends StatelessWidget {
   final Map<String, dynamic> task;
+  final VoidCallback onTap;
 
-  const TaskCard({super.key, required this.task, required Null Function() onTap});
+  const TaskCard({
+    super.key,
+    required this.task,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
-      onTap: () {
-        // Chuyển sang màn TaskDetailScreen, truyền dữ liệu nếu cần
-        Get.toNamed('/task-detail', arguments: task);
-      },
+      onTap: onTap,
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
@@ -27,6 +30,7 @@ class TaskCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Tiêu đề + trạng thái
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -45,30 +49,36 @@ class TaskCard extends StatelessWidget {
                       color: Colors.orange.shade100,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Text(
-                      'To do',
-                      style: TextStyle(color: Colors.orange, fontSize: 12),
+                    child: Text(
+                      AppLanguageKey.toDo.tr,
+                      style: const TextStyle(color: Colors.orange, fontSize: 12),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 4),
+
+              // Project / Subtitle
               Text(
                 task['project'] ?? task['subtitle'] ?? '',
                 style: const TextStyle(color: Colors.black54),
               ),
               const SizedBox(height: 8),
+
+              // Priority
               Row(
                 children: [
                   const Icon(Icons.priority_high, color: Colors.blue, size: 16),
                   const SizedBox(width: 4),
                   Text(
-                    task['priority'] ?? 'Low',
+                    task['priority'] ?? AppLanguageKey.low.tr,
                     style: const TextStyle(color: Colors.blue, fontSize: 12),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
+
+              // Progress
               Row(
                 children: [
                   const Icon(Icons.access_time, size: 16),
@@ -89,6 +99,8 @@ class TaskCard extends StatelessWidget {
                 ],
               ),
               const Divider(height: 24),
+
+              // Người phụ trách + Thời gian
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

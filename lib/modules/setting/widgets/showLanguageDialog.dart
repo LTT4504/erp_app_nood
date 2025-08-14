@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/modules/my_task/my_task_controller.dart';
 import '../../../shared/controller/locate_controller.dart';
 
 void showLanguageDialog(BuildContext context) {
@@ -21,12 +22,16 @@ void showLanguageDialog(BuildContext context) {
                     ? Colors.red
                     : Colors.grey,
               ),
-              title: const Text('Tiếng Việt',),
+              title: const Text(
+                'Tiếng Việt',
+              ),
               trailing: currentLocale.languageCode == 'vi'
                   ? const Icon(Icons.check, color: Colors.blue)
                   : null,
               onTap: () {
                 localeController.updateLocale(const Locale('vi', 'VN'));
+                final myTaskController = Get.find<MyTaskController>();
+                myTaskController.onInit();
                 Navigator.pop(context);
               },
             ),
@@ -43,6 +48,8 @@ void showLanguageDialog(BuildContext context) {
                   : null,
               onTap: () {
                 localeController.updateLocale(const Locale('en', 'US'));
+                final myTaskController = Get.find<MyTaskController>();
+                myTaskController.onInit();
                 Navigator.pop(context);
               },
             ),

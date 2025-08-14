@@ -88,7 +88,7 @@ class AppLanguageKey {
   static const String calendar = 'calendar';
   static const String noData = 'no_data';
 
-   static const String error = 'error';
+  static const String error = 'error';
   static const String pleaseSelectDate = 'pleaseSelectDate';
   static const String editLeave = 'editLeave';
   static const String registerLeave = 'registerLeave';
@@ -97,4 +97,29 @@ class AppLanguageKey {
   static const String requiredField = 'requiredField';
   static const String startDate = 'startDate';
   static const String endDate = 'endDate';
+
+  static const String filter = 'filter';
+  static const String typeLeaveFilter = 'type leave';
+  static const String fromDate = 'from date';
+  static const String toDate = 'to date';
+  static const String apply = 'apply';
+  static const String options = 'options';
+
+  // Profile
+  static const String profile = 'profile';
+  static const String generalInformation = 'general_information';
+  static const String education = 'education';
+  static const String emergencyContact = 'emergency_contact';
+  static const String position = 'position';
+  static const String bankAndSalary = 'bank & salary';
+
+  // My Tasks
+  static const String searchForJobs = 'search_for_jobs';
+  static const String interfaceDesign = 'interface_design';
+  static const String writeApi = 'write_api';
+  static const String systemTesting = 'system_testing';
+  static const String low = 'low';
+  static const String projectA = 'project_a';
+  static const String projectB = 'project_b';
+  static const String projectC = 'project_c';
 }

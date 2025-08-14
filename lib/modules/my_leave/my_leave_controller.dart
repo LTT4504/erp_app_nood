@@ -32,7 +32,7 @@ class LeaveController extends GetxController {
   void loadSampleData() {
     leaveRequests.value = [
       LeaveModel(
-        title: AppLanguageKey.annualLeave,
+        title: AppLanguageKey.annualLeave.tr,
         date: '25/03/2025 - 25/03/2025',
         status: AppLanguageKey.cancel,
         statusColor: Colors.grey.value,

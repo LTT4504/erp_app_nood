@@ -86,9 +86,17 @@ const Map<String, String> en_US = {
   'choose_an_end_date': 'Choose An End Date',
   'add_leave_application': 'Add Leave Application',
   'more': 'More',
+  'insurance_leave': 'Insurance Leave',
 
-  "missing_info": "Missing Information",
-  "please_fill_all": "Please fill in all required fields!",
+  'missing_info': 'Missing Information',
+  'please_fill_all': 'Please fill in all required fields!',
+
+  'filter': 'Filter',
+  'type leave': 'Type Leave',
+  'from date': 'From Date',
+  'to date': 'To Date',
+  'apply': 'Apply',
+  'options': 'Options',
 
   // Annual Calendar
   'annual_calendar_title': 'Annual Calendar',
@@ -115,4 +123,20 @@ const Map<String, String> en_US = {
   'requiredField': 'This field is required',
   'startDate': 'Start Date',
   'endDate': 'End Date',
+
+  // Profile
+  'profile': 'Profile',
+  'general_information': 'General Information',
+  'education': 'Education',
+  'emergency_contact': 'Emergency Contact',
+  'position': 'Position',
+  'bank & salary': 'Bank & Salary',
+
+  // My Tasks
+  'search_for_jobs': 'Search for jobs...',
+  'interface_design': 'Interface Design',
+  'write_api': 'Write API',
+  'system_testing': 'System Testing',
+  'low': 'Low',
+
 };

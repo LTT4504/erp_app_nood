@@ -59,7 +59,7 @@ class AppPages {
     // Thêm route cho màn hình MyTask
     GetPage(
       name: AppRoutes.myTask,
-      page: () => const MyTaskScreen(),
+      page: () =>  MyTaskScreen(),
       binding: MyTaskBinding(),
     ),
     // Thêm route cho màn hình MyLeave
@@ -89,6 +89,11 @@ class AppPages {
       name: AppRoutes.profile,
       page: () => const ProfileScreen(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: '/my-task',
+      page: () =>  MyTaskScreen(),
+      binding: MyTaskBinding(),
     ),
   ];
 }
