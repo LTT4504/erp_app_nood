@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../shared/constants/colors.dart';
+import '../../../shared/widgets/action_buttons.dart';
 import 'general_information_controller.dart';
 import '../../../shared/widgets/date_range_picker.dart';
 import '../../../shared/widgets/custom_text_form_field.dart';
@@ -75,39 +76,12 @@ class GeneralInformationScreen extends GetView<GeneralInformationController> {
             ),
             const SizedBox(height: 30),
             if (controller.isEditing.value)
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: controller.cancelEditing,
-                      icon: const Icon(Icons.close),
-                      label: const Text("Cancel"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[400],
-                        foregroundColor: Colors.black87,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: controller.updateUserInfo,
-                      icon: const Icon(Icons.save),
-                      label: const Text("Save"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorConstants.highlightPrimary,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: ActionButtons(
+                  onCancel: controller.cancelEditing,
+                  onSave: controller.updateUserInfo,
+                ),
               ),
           ],
         );
@@ -158,7 +132,7 @@ Widget _buildTextField(
             decoration: InputDecoration(
               prefixIcon: Icon(icon, color: ColorConstants.highlightPrimary),
               labelText: label,
-              labelStyle: const TextStyle(fontSize: 16, color: Colors.grey),
+              labelStyle: const TextStyle(fontSize: 16, color: ColorConstants.highlightPrimary),
               filled: true,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),

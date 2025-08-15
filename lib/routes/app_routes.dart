@@ -1,3 +1,4 @@
+
 abstract class AppRoutes {
   static const login = '/login';
   static const home = '/home';
@@ -17,4 +18,5 @@ abstract class AppRoutes {
   static const generalInfo = '/general-info';
   static const position = '/position';
   static const bankSalary = '/bank-salary';
+  static const emergencyContact = '/emergency-contact';
 }

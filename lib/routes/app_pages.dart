@@ -18,6 +18,8 @@ import '../modules/forgot_password/sent_email_success.dart';
 import '../modules/intro/splash_screen.dart';
 import '../modules/notification/notification_binding.dart';
 import '../modules/notification/notification_screen.dart';
+import '../modules/profile/emergency_contact/emergency_contact_binding.dart';
+import '../modules/profile/emergency_contact/emergency_contact_screen.dart';
 import '../modules/profile/general_information/general_information_binding.dart';
 import '../modules/profile/general_information/general_information_screen.dart';
 import '../modules/profile/position/position_binding.dart';
@@ -123,6 +125,11 @@ class AppPages {
       name: AppRoutes.bankSalary,
       page: () => const BankSalaryScreen(),
       binding: BankSalaryBinding(),
+    ),
+    GetPage(  
+      name: AppRoutes.emergencyContact,
+      page: () => const EmergencyContactScreen(),
+      binding: EmergencyContactBinding(),
     ),
   ];
 }
