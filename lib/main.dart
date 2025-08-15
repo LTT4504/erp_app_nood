@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'lang/generate/translation_service.dart';
 import 'modules/auth/auth_binding.dart';
+import 'modules/profile/education/education_controller.dart';
 import 'routes/routes.dart';
 import 'shared/controller/locate_controller.dart';
 
@@ -16,7 +17,7 @@ Future<void> main() async {
   await initializeDateFormatting();
 
   Get.put(LocaleController());
-
+  Get.put(EducationController());
   runApp(const MyApp());
 }
 

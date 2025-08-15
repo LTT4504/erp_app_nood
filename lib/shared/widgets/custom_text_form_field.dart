@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:work_manager/shared/constants/colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String label;
@@ -9,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final Widget? suffix;
+  final bool readOnly;
 
   const CustomTextFormField({
     super.key,
@@ -20,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     this.suffix,
+    this.readOnly = false,
   });
 
   @override
@@ -29,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       cursorColor: Colors.black,
       validator: validator,
+      readOnly: readOnly,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -37,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: TextStyle(color: primaryColor),
         hintStyle: TextStyle(color: primaryColor.withValues(alpha: 0.6)),
         filled: true,
-        fillColor: const Color(0xFFF5F5F5), // Light gray
+        fillColor: readOnly ? Colors.grey.shade200 :  ColorConstants.white, // mờ khi khóa
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: primaryColor),
@@ -45,14 +49,6 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: primaryColor, width: 2),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: Colors.red, width: 2),
         ),
       ),
     );

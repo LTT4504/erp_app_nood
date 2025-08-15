@@ -13,4 +13,5 @@ abstract class AppRoutes {
   static const personalNotifications = '/personal-notifications';
   static const taskDetail = '/task-detail';
   static const profile = '/profile';
+  static const education = '/education';
 }

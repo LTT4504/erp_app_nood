@@ -18,6 +18,8 @@ import '../modules/notification/notification_binding.dart';
 import '../modules/notification/notification_screen.dart';
 import '../modules/profile/profile_binding.dart';
 import '../modules/profile/profile_screen.dart';
+import '../modules/profile/education/education_binding.dart';
+import '../modules/profile/education/education_screen.dart';
 import '../modules/task_detail/task_detail_binding.dart';
 import '../modules/task_detail/task_detail_screen.dart';
 import 'app_routes.dart';
@@ -59,7 +61,7 @@ class AppPages {
     // Thêm route cho màn hình MyTask
     GetPage(
       name: AppRoutes.myTask,
-      page: () =>  MyTaskScreen(),
+      page: () => MyTaskScreen(),
       binding: MyTaskBinding(),
     ),
     // Thêm route cho màn hình MyLeave
@@ -92,8 +94,13 @@ class AppPages {
     ),
     GetPage(
       name: '/my-task',
-      page: () =>  MyTaskScreen(),
+      page: () => MyTaskScreen(),
       binding: MyTaskBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.education,
+      page: () => const EducationScreen(),
+      binding: EducationBinding(),
     ),
   ];
 }
