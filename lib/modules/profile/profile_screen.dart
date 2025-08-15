@@ -4,7 +4,7 @@ import '../../shared/constants/colors.dart';
 import '../../shared/widgets/custom_button.dart';
 import '../../shared/services/token_storage.dart';
 import '../../routes/routes.dart';
-import '../../lang/app_language_key.dart'; // Import key ngôn ngữ
+import '../../lang/app_language_key.dart';
 import 'profile_controller.dart';
 
 class ProfileScreen extends GetView<ProfileController> {
@@ -18,7 +18,7 @@ class ProfileScreen extends GetView<ProfileController> {
         backgroundColor: ColorConstants.highlightPrimary,
         elevation: 0,
         title: Text(
-          AppLanguageKey.profile.tr, // Dùng bản dịch
+          AppLanguageKey.profile.tr,
           style: const TextStyle(
             color: ColorConstants.white,
             fontWeight: FontWeight.w600,
@@ -41,16 +41,8 @@ class ProfileScreen extends GetView<ProfileController> {
                     CircleAvatar(
                       radius: 45,
                       backgroundColor: ColorConstants.white,
-                      child: Icon(Icons.person, size: 50, color: ColorConstants.highlightPrimary),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: CircleAvatar(
-                        radius: 14,
-                        backgroundColor: ColorConstants.highlightPrimary,
-                        child: Icon(Icons.edit, size: 14, color: ColorConstants.white),
-                      ),
+                      child: Icon(Icons.person,
+                          size: 50, color: ColorConstants.highlightPrimary),
                     ),
                   ],
                 ),
@@ -74,11 +66,19 @@ class ProfileScreen extends GetView<ProfileController> {
             ),
           ),
           const SizedBox(height: 24),
-          _buildMenuItem(Icons.person_outline, AppLanguageKey.generalInformation.tr),
-          _buildMenuItem(Icons.phone_android, AppLanguageKey.emergencyContact.tr),
-          _buildMenuItem(Icons.school_outlined, AppLanguageKey.education.tr),
-          _buildMenuItem(Icons.work_outline, AppLanguageKey.position.tr),
-          _buildMenuItem(Icons.account_balance_outlined, AppLanguageKey.bankAndSalary.tr),
+          // _buildMenuItem(
+          //     Icons.person_outline, AppLanguageKey.generalInformation.tr),
+          // _buildMenuItem(
+          //     Icons.phone_android, AppLanguageKey.emergencyContact.tr),
+          _buildMenuItem(
+            Icons.school_outlined,
+            AppLanguageKey.education.tr,
+            onTap: () => Get.toNamed(AppRoutes.education),
+          ),
+          // _buildMenuItem(Icons.work_outline, AppLanguageKey.position.tr),
+          // _buildMenuItem(Icons.account_balance_outlined,
+          //     AppLanguageKey.bankAndSalary.tr),
+
           const SizedBox(height: 20),
           _buildLogoutButton(),
         ],
@@ -86,13 +86,19 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String title, {String? badge}) {
+  Widget _buildMenuItem(
+    IconData icon,
+    String title, {
+    String? badge,
+    VoidCallback? onTap,
+  }) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 6),
       color: ColorConstants.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: ColorConstants.highlightPrimary, width: 1),
+        side:
+            const BorderSide(color: ColorConstants.highlightPrimary, width: 1),
       ),
       elevation: 0.5,
       child: ListTile(
@@ -107,11 +113,14 @@ class ProfileScreen extends GetView<ProfileController> {
                 ),
                 child: Text(
                   badge,
-                  style: const TextStyle(color: ColorConstants.white, fontSize: 12),
+                  style: const TextStyle(
+                    color: ColorConstants.white,
+                    fontSize: 12,
+                  ),
                 ),
               )
             : null,
-        onTap: () {},
+        onTap: onTap,
       ),
     );
   }
@@ -120,7 +129,7 @@ class ProfileScreen extends GetView<ProfileController> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: CustomButton(
-        label: AppLanguageKey.logout.tr, 
+        label: AppLanguageKey.logout.tr,
         icon: Icons.logout,
         backgroundColor: ColorConstants.red,
         onPressed: () async {
