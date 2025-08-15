@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:work_manager/shared/constants/colors.dart';
 
+// custom_text_form_field.dart
 class CustomTextFormField extends StatelessWidget {
   final String label;
   final String hint;
@@ -39,7 +40,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: Icon(icon, color: primaryColor),
         suffixIcon: suffix,
         labelStyle: TextStyle(color: primaryColor),
-        hintStyle: TextStyle(color: primaryColor.withValues(alpha: 0.6)),
+        hintStyle: TextStyle(color: primaryColor.withOpacity(0.6)),
         filled: true,
         fillColor: readOnly ? Colors.grey.shade200 :  ColorConstants.white, // mờ khi khóa
         enabledBorder: OutlineInputBorder(

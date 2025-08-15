@@ -16,6 +16,8 @@ import '../modules/forgot_password/sent_email_success.dart';
 import '../modules/intro/splash_screen.dart';
 import '../modules/notification/notification_binding.dart';
 import '../modules/notification/notification_screen.dart';
+import '../modules/profile/general_information/general_information_binding.dart';
+import '../modules/profile/general_information/general_information_screen.dart';
 import '../modules/profile/profile_binding.dart';
 import '../modules/profile/profile_screen.dart';
 import '../modules/profile/education/education_binding.dart';
@@ -92,15 +94,23 @@ class AppPages {
       page: () => const ProfileScreen(),
       binding: ProfileBinding(),
     ),
-    GetPage(
-      name: '/my-task',
-      page: () => MyTaskScreen(),
-      binding: MyTaskBinding(),
-    ),
+  
     GetPage(
       name: AppRoutes.education,
       page: () => const EducationScreen(),
       binding: EducationBinding(),
     ),
+    GetPage(
+      name: AppRoutes.myTask,
+      page: () =>  MyTaskScreen(),
+      binding: MyTaskBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.generalInfo,
+     page: () => const GeneralInformationScreen(),
+  binding: GeneralInformationBinding(),
+
+    ),
+
   ];
 }

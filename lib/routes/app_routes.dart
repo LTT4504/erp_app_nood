@@ -14,4 +14,5 @@ abstract class AppRoutes {
   static const taskDetail = '/task-detail';
   static const profile = '/profile';
   static const education = '/education';
+  static const generalInfo = '/general-info';
 }

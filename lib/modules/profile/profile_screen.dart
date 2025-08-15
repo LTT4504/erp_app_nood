@@ -44,6 +44,16 @@ class ProfileScreen extends GetView<ProfileController> {
                       child: Icon(Icons.person,
                           size: 50, color: ColorConstants.highlightPrimary),
                     ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: 14,
+                        backgroundColor: ColorConstants.highlightPrimary,
+                        child: Icon(Icons.edit,
+                            size: 14, color: ColorConstants.white),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -79,6 +89,20 @@ class ProfileScreen extends GetView<ProfileController> {
           // _buildMenuItem(Icons.account_balance_outlined,
           //     AppLanguageKey.bankAndSalary.tr),
 
+          _buildMenuItem(
+            Icons.person_outline,
+            AppLanguageKey.generalInformation.tr,
+            onTap: () {
+              Get.toNamed(AppRoutes.generalInfo);
+            },
+          ),
+
+          _buildMenuItem(
+              Icons.phone_android, AppLanguageKey.emergencyContact.tr),
+          _buildMenuItem(Icons.school_outlined, AppLanguageKey.education.tr),
+          _buildMenuItem(Icons.work_outline, AppLanguageKey.position.tr),
+          _buildMenuItem(
+              Icons.account_balance_outlined, AppLanguageKey.bankAndSalary.tr),
           const SizedBox(height: 20),
           _buildLogoutButton(),
         ],
@@ -86,12 +110,8 @@ class ProfileScreen extends GetView<ProfileController> {
     );
   }
 
-  Widget _buildMenuItem(
-    IconData icon,
-    String title, {
-    String? badge,
-    VoidCallback? onTap,
-  }) {
+  Widget _buildMenuItem(IconData icon, String title,
+      {String? badge, VoidCallback? onTap}) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 6),
       color: ColorConstants.white,
@@ -114,9 +134,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 child: Text(
                   badge,
                   style: const TextStyle(
-                    color: ColorConstants.white,
-                    fontSize: 12,
-                  ),
+                      color: ColorConstants.white, fontSize: 12),
                 ),
               )
             : null,
