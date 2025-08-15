@@ -85,7 +85,10 @@ class ProfileScreen extends GetView<ProfileController> {
             },
           ),
           _buildMenuItem(
-              Icons.phone_android, AppLanguageKey.emergencyContact.tr),
+              Icons.phone_android, AppLanguageKey.emergencyContact.tr,
+              onTap: () {
+            Get.toNamed(AppRoutes.emergencyContact);
+          }),
           _buildMenuItem(
             Icons.school_outlined,
             AppLanguageKey.education.tr,
