@@ -23,7 +23,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.obscureText = false,
     this.suffix,
-    this.readOnly = false,
+    this.readOnly = false, Future<Null> Function()? onTap,
   });
 
   @override

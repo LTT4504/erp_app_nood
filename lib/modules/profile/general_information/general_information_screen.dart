@@ -6,7 +6,7 @@ import '../../../shared/widgets/date_range_picker.dart';
 import '../../../shared/widgets/custom_text_form_field.dart';
 
 class GeneralInformationScreen extends GetView<GeneralInformationController> {
-  const GeneralInformationScreen({Key? key}) : super(key: key);
+  const GeneralInformationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

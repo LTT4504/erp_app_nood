@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:work_manager/modules/profile/bank_salary/bank_salary_binding.dart';
+import 'package:work_manager/modules/profile/bank_salary/bank_salary_screen.dart';
 import '../modules/annual_calendar/annual_calendar_binding.dart';
 import '../modules/annual_calendar/annual_calendar_screen.dart';
 import '../modules/attendance/attendance_history_screen.dart';
@@ -18,6 +20,8 @@ import '../modules/notification/notification_binding.dart';
 import '../modules/notification/notification_screen.dart';
 import '../modules/profile/general_information/general_information_binding.dart';
 import '../modules/profile/general_information/general_information_screen.dart';
+import '../modules/profile/position/position_binding.dart';
+import '../modules/profile/position/position_screen.dart';
 import '../modules/profile/profile_binding.dart';
 import '../modules/profile/profile_screen.dart';
 import '../modules/profile/education/education_binding.dart';
@@ -94,7 +98,7 @@ class AppPages {
       page: () => const ProfileScreen(),
       binding: ProfileBinding(),
     ),
-  
+
     GetPage(
       name: AppRoutes.education,
       page: () => const EducationScreen(),
@@ -102,15 +106,23 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.myTask,
-      page: () =>  MyTaskScreen(),
+      page: () => MyTaskScreen(),
       binding: MyTaskBinding(),
     ),
     GetPage(
       name: AppRoutes.generalInfo,
-     page: () => const GeneralInformationScreen(),
-  binding: GeneralInformationBinding(),
-
+      page: () => const GeneralInformationScreen(),
+      binding: GeneralInformationBinding(),
     ),
-
+    GetPage(
+      name: AppRoutes.position,
+      page: () => const PositionScreen(),
+      binding: PositionBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.bankSalary,
+      page: () => const BankSalaryScreen(),
+      binding: BankSalaryBinding(),
+    ),
   ];
 }

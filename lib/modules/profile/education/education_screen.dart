@@ -50,7 +50,7 @@ class _EducationScreenState extends State<EducationScreen> {
       appBar: AppBar(
         foregroundColor: ColorConstants.white,
         title: const Text("Education",style: TextStyle(color: ColorConstants.white),),
-        backgroundColor: Colors.green,
+        backgroundColor: ColorConstants.highlightPrimary,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -78,7 +78,7 @@ class _EducationScreenState extends State<EducationScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorConstants.green,
+        backgroundColor: ColorConstants.highlightPrimary,
         child: Icon(isEditing ? Icons.save : Icons.edit, color: ColorConstants.white,),
         onPressed: () {
           setState(() {

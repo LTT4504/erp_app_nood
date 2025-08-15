@@ -76,18 +76,6 @@ class ProfileScreen extends GetView<ProfileController> {
             ),
           ),
           const SizedBox(height: 24),
-          // _buildMenuItem(
-          //     Icons.person_outline, AppLanguageKey.generalInformation.tr),
-          // _buildMenuItem(
-          //     Icons.phone_android, AppLanguageKey.emergencyContact.tr),
-          _buildMenuItem(
-            Icons.school_outlined,
-            AppLanguageKey.education.tr,
-            onTap: () => Get.toNamed(AppRoutes.education),
-          ),
-          // _buildMenuItem(Icons.work_outline, AppLanguageKey.position.tr),
-          // _buildMenuItem(Icons.account_balance_outlined,
-          //     AppLanguageKey.bankAndSalary.tr),
 
           _buildMenuItem(
             Icons.person_outline,
@@ -96,13 +84,23 @@ class ProfileScreen extends GetView<ProfileController> {
               Get.toNamed(AppRoutes.generalInfo);
             },
           ),
-
           _buildMenuItem(
               Icons.phone_android, AppLanguageKey.emergencyContact.tr),
-          _buildMenuItem(Icons.school_outlined, AppLanguageKey.education.tr),
-          _buildMenuItem(Icons.work_outline, AppLanguageKey.position.tr),
           _buildMenuItem(
-              Icons.account_balance_outlined, AppLanguageKey.bankAndSalary.tr),
+            Icons.school_outlined,
+            AppLanguageKey.education.tr,
+            onTap: () => Get.toNamed(AppRoutes.education),
+          ),
+          _buildMenuItem(
+            Icons.work_outline,
+            AppLanguageKey.position.tr,
+            onTap: () => Get.toNamed(AppRoutes.position),
+          ),
+          _buildMenuItem(
+            Icons.account_balance_outlined,
+            AppLanguageKey.bankAndSalary.tr,
+            onTap: () => Get.toNamed(AppRoutes.bankSalary),
+          ),
           const SizedBox(height: 20),
           _buildLogoutButton(),
         ],

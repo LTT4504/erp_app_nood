@@ -15,4 +15,6 @@ abstract class AppRoutes {
   static const profile = '/profile';
   static const education = '/education';
   static const generalInfo = '/general-info';
+  static const position = '/position';
+  static const bankSalary = '/bank-salary';
 }
