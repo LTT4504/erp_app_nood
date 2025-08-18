@@ -14,22 +14,33 @@ class PositionController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    jobTitleController = TextEditingController(text: box.read("jobTitle") ?? "Software Engineer");
-    departmentController = TextEditingController(text: box.read("department") ?? "IT Department");
-    workLocationController = TextEditingController(text: box.read("workLocation") ?? "Hanoi Office");
+    jobTitleController = TextEditingController(
+        text: box.read("jobTitle") ?? "Software Engineer");
+    departmentController = TextEditingController(
+        text: box.read("department") ?? "IT Department");
+    workLocationController = TextEditingController(
+        text: box.read("workLocation") ?? "Hanoi Office");
   }
 
+  /// Bật / tắt chế độ edit
   void toggleEdit() {
-    if (isEditing.value) {
-      saveData();
-    }
     isEditing.value = !isEditing.value;
   }
 
+  /// Lưu dữ liệu
   void saveData() {
     box.write("jobTitle", jobTitleController.text);
     box.write("department", departmentController.text);
     box.write("workLocation", workLocationController.text);
+    isEditing.value = false; // thoát chế độ edit sau khi lưu
+  }
+
+  /// Huỷ chỉnh sửa
+  void cancelEdit() {
+    jobTitleController.text = box.read("jobTitle") ?? "Software Engineer";
+    departmentController.text = box.read("department") ?? "IT Department";
+    workLocationController.text = box.read("workLocation") ?? "Hanoi Office";
+    isEditing.value = false;
   }
 
   @override

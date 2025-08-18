@@ -1,198 +1,124 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:dio/dio.dart';
-import '../../../../api/api_constant.dart';
-import '../../../shared/services/token_storage.dart';
+import 'package:work_manager/shared/constants/colors.dart';
+
+import '../../../models/model/user_model.dart';
+import '../../../shared/services/user_service.dart';
 
 class GeneralInformationController extends GetxController {
-  // --- Trạng thái ---
-  final isLoading = false.obs;
-  final isEditing = false.obs;
+  final formKey = GlobalKey<FormState>();
+  var isEditing = false.obs;
 
-  // --- Observables gốc ---
-  final fullName = ''.obs;
-  final nickName = ''.obs;
-  final birthday = ''.obs;
-  final gender = ''.obs;
-  final phoneNumber = ''.obs;
-  final idNumber = ''.obs;
-  final provideDate = ''.obs;
-  final providePlace = ''.obs;
-  final maritalStatus = ''.obs;
-  final numberOfChildren = 0.obs;
-  final placeOfBirth = ''.obs;
-  final address = ''.obs;
+  // Text controllers
+  final fullNameController = TextEditingController();
+  final nickNameController = TextEditingController();
+  final phoneNoController = TextEditingController();
+  final birthdayController = TextEditingController();
+  final genderController = TextEditingController();
+  final maritalStatusController = TextEditingController();
+  final numberChildController = TextEditingController();
+  final placeOfBirthController = TextEditingController();
+  final addressController = TextEditingController();
+  final identityCardController = TextEditingController();
+  final provideDateIdentityCardController = TextEditingController();
+  final providePlaceIdentityCardController = TextEditingController();
 
-  // --- Controllers cho form ---
-  late TextEditingController fullNameController;
-  late TextEditingController nickNameController;
-  late TextEditingController birthdayController;
-  late TextEditingController genderController;
-  late TextEditingController phoneNumberController;
-  late TextEditingController idNumberController;
-  late TextEditingController provideDateController;
-  late TextEditingController providePlaceController;
-  late TextEditingController maritalStatusController;
-  late TextEditingController numberOfChildrenController;
-  late TextEditingController placeOfBirthController;
-  late TextEditingController addressController;
+  // Load từ API
+  Future<void> fetchGeneralInformation() async {
+    try {
+      final user = await UserService.getMe();
+      if (user != null) {
+        _fillControllers(user);
+      } else {
+        Get.snackbar("Error", "Invalid Employee",
+            backgroundColor: ColorConstants.red,
+            colorText: ColorConstants.white);
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Failed to fetch general information",
+          backgroundColor: ColorConstants.red,
+          colorText: ColorConstants.white);
+    }
+  }
 
-  // --- Networking ---
-  final Dio _dio = Dio();
+  // Update API
+  Future<void> updateGeneralInformation() async {
+    if (!formKey.currentState!.validate()) return;
+
+    try {
+      final user = _getUserFromControllers();
+      final success = await UserService.updateMe(user);
+
+      if (success) {
+        Get.snackbar("Success", "Profile updated successfully",
+            backgroundColor: ColorConstants.green,
+            colorText: ColorConstants.white);
+        isEditing.value = false;
+      } else {
+        Get.snackbar("Error", "Update failed",
+            backgroundColor: ColorConstants.red,
+            colorText: ColorConstants.white);
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Failed to update profile",
+          backgroundColor: ColorConstants.red,
+          colorText: ColorConstants.white);
+    }
+  }
+
+  // Helper
+  void _fillControllers(UserModel user) {
+    fullNameController.text = user.fullName ?? '';
+    nickNameController.text = user.nickName ?? '';
+    phoneNoController.text = user.phoneNo ?? '';
+    birthdayController.text = user.birthday ?? '';
+    genderController.text = user.gender?.toString() ?? '';
+    maritalStatusController.text = user.maritalStatus?.toString() ?? '';
+    numberChildController.text = user.numberChild?.toString() ?? '';
+    placeOfBirthController.text = user.placeOfBirth ?? '';
+    addressController.text = user.address ?? '';
+    identityCardController.text = user.identityCard ?? '';
+    provideDateIdentityCardController.text = user.provideDateIdentityCard ?? '';
+    providePlaceIdentityCardController.text = user.providePlaceIdentityCard ?? '';
+  }
+
+  UserModel _getUserFromControllers() {
+    return UserModel(
+      fullName: fullNameController.text,
+      nickName: nickNameController.text,
+      phoneNo: phoneNoController.text,
+      birthday: birthdayController.text,
+      gender: int.tryParse(genderController.text),
+      maritalStatus: int.tryParse(maritalStatusController.text),
+      numberChild: int.tryParse(numberChildController.text),
+      placeOfBirth: placeOfBirthController.text,
+      address: addressController.text,
+      identityCard: identityCardController.text,
+      provideDateIdentityCard: provideDateIdentityCardController.text,
+      providePlaceIdentityCard: providePlaceIdentityCardController.text,
+    );
+  }
 
   @override
   void onInit() {
     super.onInit();
-    _initControllers();
-    fetchUserInfo();
+    fetchGeneralInformation();
   }
 
-  void _initControllers() {
-    fullNameController = TextEditingController();
-    nickNameController = TextEditingController();
-    birthdayController = TextEditingController();
-    genderController = TextEditingController();
-    phoneNumberController = TextEditingController();
-    idNumberController = TextEditingController();
-    provideDateController = TextEditingController();
-    providePlaceController = TextEditingController();
-    maritalStatusController = TextEditingController();
-    numberOfChildrenController = TextEditingController();
-    placeOfBirthController = TextEditingController();
-    addressController = TextEditingController();
-  }
-
-  /// Lấy thông tin người dùng từ API
-  Future<void> fetchUserInfo() async {
-    isLoading.value = true;
-    try {
-      final token = await TokenStorage.getAccessToken();
-      if (token == null || token.isEmpty) {
-        Get.snackbar('Lỗi', 'Không tìm thấy access token. Vui lòng đăng nhập lại.');
-        return;
-      }
-
-      final response = await _dio.get(
-        '${ApiConstant.baseUrl}/api/user/me',
-        options: Options(
-          headers: {
-            'accept': '*/*',
-            'Authorization': 'Bearer $token',
-          },
-        ),
-      );
-
-      if (response.statusCode == 200 && response.data['data'] != null) {
-        final data = response.data['data'];
-
-        // Gán vào observable
-        fullName.value = data['fullName'] ?? '';
-        nickName.value = data['nickName'] ?? '';
-        birthday.value = data['birthday'] ?? '';
-        gender.value = data['gender']?.toString() ?? '';
-        phoneNumber.value = data['phoneNo'] ?? '';
-        idNumber.value = data['identityCard'] ?? '';
-        provideDate.value = data['provideDateIdentityCard'] ?? '';
-        providePlace.value = data['providePlaceIdentityCard'] ?? '';
-        maritalStatus.value = data['maritalStatus']?.toString() ?? '';
-        numberOfChildren.value = data['numberChild'] ?? 0;
-        placeOfBirth.value = data['placeOfBirth'] ?? '';
-        address.value = data['address'] ?? '';
-
-        // Gán vào controller form
-        fullNameController.text = fullName.value;
-        nickNameController.text = nickName.value;
-        birthdayController.text = birthday.value;
-        genderController.text = gender.value;
-        phoneNumberController.text = phoneNumber.value;
-        idNumberController.text = idNumber.value;
-        provideDateController.text = provideDate.value;
-        providePlaceController.text = providePlace.value;
-        maritalStatusController.text = maritalStatus.value;
-        numberOfChildrenController.text = numberOfChildren.value.toString();
-        placeOfBirthController.text = placeOfBirth.value;
-        addressController.text = address.value;
-      } else {
-        Get.snackbar('Lỗi', 'Không lấy được thông tin người dùng.');
-      }
-    } catch (e) {
-      Get.snackbar(
-        'Lỗi',
-        'Đã xảy ra lỗi: ${e is DioError ? e.message : e.toString()}',
-      );
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  /// Bật chế độ chỉnh sửa
-  void enableEditing() {
-    isEditing.value = true;
-  }
-
-  /// Hủy chỉnh sửa
-  void cancelEditing() {
-    isEditing.value = false;
-    // Reset lại dữ liệu form về như ban đầu
-    fullNameController.text = fullName.value;
-    nickNameController.text = nickName.value;
-    birthdayController.text = birthday.value;
-    genderController.text = gender.value;
-    phoneNumberController.text = phoneNumber.value;
-    idNumberController.text = idNumber.value;
-    provideDateController.text = provideDate.value;
-    providePlaceController.text = providePlace.value;
-    maritalStatusController.text = maritalStatus.value;
-    numberOfChildrenController.text = numberOfChildren.value.toString();
-    placeOfBirthController.text = placeOfBirth.value;
-    addressController.text = address.value;
-  }
-
-  /// Lưu thông tin mới lên API
-  Future<void> updateUserInfo() async {
-    try {
-      final token = await TokenStorage.getAccessToken();
-      if (token == null || token.isEmpty) {
-        Get.snackbar('Lỗi', 'Không tìm thấy access token.');
-        return;
-      }
-
-      final body = {
-        'fullName': fullNameController.text,
-        'nickName': nickNameController.text,
-        'birthday': birthdayController.text,
-        'gender': genderController.text,
-        'phoneNo': phoneNumberController.text,
-        'identityCard': idNumberController.text,
-        'provideDateIdentityCard': provideDateController.text,
-        'providePlaceIdentityCard': providePlaceController.text,
-        'maritalStatus': maritalStatusController.text,
-        'numberChild': int.tryParse(numberOfChildrenController.text) ?? 0,
-        'placeOfBirth': placeOfBirthController.text,
-        'address': addressController.text,
-      };
-
-      final response = await _dio.put(
-        '${ApiConstant.baseUrl}/api/user/me',
-        data: body,
-        options: Options(
-          headers: {
-            'accept': '*/*',
-            'Authorization': 'Bearer $token',
-            'Content-Type': 'application/json',
-          },
-        ),
-      );
-
-      if (response.statusCode == 200) {
-        Get.snackbar('Thành công', 'Cập nhật thông tin thành công.');
-        isEditing.value = false;
-        await fetchUserInfo(); // Load lại dữ liệu mới
-      } else {
-        Get.snackbar('Lỗi', 'Cập nhật thất bại.');
-      }
-    } catch (e) {
-      Get.snackbar('Lỗi', 'Đã xảy ra lỗi: ${e.toString()}');
-    }
+  @override
+  void onClose() {
+    fullNameController.dispose();
+    nickNameController.dispose();
+    phoneNoController.dispose();
+    birthdayController.dispose();
+    genderController.dispose();
+    maritalStatusController.dispose();
+    numberChildController.dispose();
+    placeOfBirthController.dispose();
+    addressController.dispose();
+    identityCardController.dispose();
+    provideDateIdentityCardController.dispose();
+    providePlaceIdentityCardController.dispose();
+    super.onClose();
   }
 }
