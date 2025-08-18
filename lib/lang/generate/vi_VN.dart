@@ -57,6 +57,7 @@ const Map<String, String> vi_VN = {
   'about_us': 'Về chúng tôi',
   'logout': 'Đăng xuất',
   'full_name': 'Họ và tên',
+  'full_number': 'Số điện thoại',
   'employee_id': 'Mã nhân viên',
 
   // Yêu cầu nghỉ phép
@@ -140,4 +141,62 @@ const Map<String, String> vi_VN = {
   'write_api': 'Viết API',
   'system_testing': 'Kiểm thử hệ thống',
   'low': 'Chậm',
+
+  //Giáo dục
+  'education_information': 'Giáo dục thông tin',
+  'soft_skills': 'Kĩ năng mềm',
+  'business_experience': 'Kinh nghiệm kinh doanh',
+  'foreign_languages': 'Ngoại ngữ',
+  'english': 'Tiếng anh',
+  'japanese': 'Tiếng Nhật',
+
+  //Ngân hàng và Lương
+  'bank_name': 'Tên ngân hàng',
+  'account_name': 'Tên tài khoản',
+  'account_number': 'Số tài khoản',
+  'salary_basic': 'Mức lương cơ bản',
+  'payment_type': 'Loại thanh toán',
+  'salary_gross': 'Mức lương tổng',
+  'cash': 'Tiền mặt',
+  'bank_transfer': 'Chuyển khoản',
+
+  // Vị trí
+  'position_details': 'Chi tiết vị trí',
+  'job_title': 'Chức danh công việc',
+  'department': 'Phòng ban',
+  'work_location': 'Địa điểm làm việc',
+
+  //Liên hệ khẩn cấp
+  'primary_contact': 'Liên hệ chính',
+  'relationship': 'Mối quan hệ',
+  'secondary_contact': 'Liên hệ phụ',
+
+  //Thông tin chung
+  'nick_name': 'Biệt danh',
+  'birth_day': 'Ngày sinh',
+  'gender': 'Giới tính',
+  'phone_number': 'Số điện thoại',
+  'id_number': 'Mã số CMND/CCCD',
+  'provide_date': 'Ngày cung cấp',
+  'provide_place': 'Nơi cung cấp',
+  'marital_status': 'Tình trạng hôn nhân',
+  'number_of_children': 'Số lượng con',
+  'place_of_birth': 'Nơi sinh',
+  'permanent_address': 'Địa chỉ thường trú',
+
+  //Chi tiết nhiệm vụ
+  'task_detail': 'Chi tiết nhiệm vụ',
+  'description': 'Mô tả',
+  'comments': 'Bình luận',
+  'document': 'Tài liệu',
+  'sub_tasks': 'Nhiệm vụ phụ',
+  'history': 'Lịch sử',
+  'parent_task': 'Nhiệm vụ ',
+  'priority': 'Mức độ ưu tiên',
+  'assignee': 'Người được giao',
+  'completed_time': 'Thời gian hoàn thành',
+  'estimated_time': 'Thời gian ước tính',
+  'progress': 'Tiến độ',
+  'log_time': 'Thời gian ghi nhật ký',
+  '--hours' : '-- Giờ',
 };

@@ -1,6 +1,7 @@
 // bank_salary_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import 'package:work_manager/shared/constants/colors.dart';
 import '../../../shared/widgets/custom_text_form_field.dart';
 import '../../../shared/widgets/action_buttons.dart';
@@ -16,9 +17,9 @@ class BankSalaryScreen extends GetView<BankSalaryController> {
       backgroundColor: ColorConstants.highlightPrimaryPastel,
       appBar: AppBar(
         foregroundColor: ColorConstants.white,
-        title: const Text(
-          "Bank & Salary",
-          style: TextStyle(color: ColorConstants.white),
+        title: Text(
+          AppLanguageKey.bankAndSalary.tr,
+          style: const TextStyle(color: ColorConstants.white),
         ),
         backgroundColor: ColorConstants.highlightPrimary,
         centerTitle: true,

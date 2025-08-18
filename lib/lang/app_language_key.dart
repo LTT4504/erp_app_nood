@@ -38,6 +38,8 @@ class AppLanguageKey {
   static const String aboutUs = 'about_us';
   static const String logout = 'logout';
   static const String fullName = 'full_name';
+  static const String fullNumber = 'full_number';
+
   static const String employeeId = 'employee_id';
 
   // Leave request
@@ -122,4 +124,62 @@ class AppLanguageKey {
   static const String projectA = 'project_a';
   static const String projectB = 'project_b';
   static const String projectC = 'project_c';
+
+  // Education
+  static const String educationInformation = 'education_information';
+  static const String softSkills = 'soft_skills';
+  static const String businessExperience = 'business_experience';
+  static const String foreignLanguages = 'foreign_languages';
+  static const String english = 'english';
+  static const String japanese = 'japanese';
+
+  // Bank And Salary
+  static const String bankName = 'bank_name';
+  static const String accountName = 'account_name';
+  static const String accountNumber = 'account_number';
+  static const String salaryBasic = 'salary_basic';
+  static const String paymentType = 'payment_type';
+  static const String salaryGross = 'salary_gross';
+  static const String cash = 'cash';
+  static const String bankTransfer = 'bank_transfer';
+
+  // Position
+  static const String positionDetails = 'position_details';
+  static const String jobTitle = 'job_title';
+  static const String department = 'department';
+  static const String workLocation = 'work_location';
+
+  //Emergency Contact
+  static const String primaryContact = 'primary_contact';
+  static const String relationship = 'relationship';
+  static const String secondaryContact = 'secondary_contact';
+
+  //General Information
+  static const String nickName = 'nick_name';
+  static const String gender = 'gender';
+  static const String birthDay = 'birth_day';
+  static const String phoneNumber = 'phone_number';
+  static const String idNumber = 'id_number';
+  static const String provideDate = 'provide_date';
+  static const String providePlace = 'provide_place';
+  static const String maritalStatus = 'marital_status';
+  static const String numberOfChildren = 'number_of_children';
+  static const String placeOfBirth = 'place_of_birth';
+  static const String permanentAddress = 'permanent_address';
+
+  //Task Detail
+  static const String taskDetail = 'task_detail';
+  static const String description = 'description';
+  static const String comments = 'comments';
+  static const String document = 'document';
+  static const String subTasks = 'sub_tasks';
+  static const String history = 'history';
+  static const String parentTask = 'parent_task';
+  static const String priority = 'priority';
+  static const String assignee = 'assignee';
+  static const String completedTime = 'completed_time';
+  static const String estimatedTime = 'estimated_time';
+  static const String progress = 'progress';
+  static const String logTime = 'log_time';
+  static const String hours = '--hours';
 }
