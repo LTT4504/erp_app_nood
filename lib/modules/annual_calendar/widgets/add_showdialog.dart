@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../annual_calendar_controller.dart';
 import '../../../lang/app_language_key.dart';
+import 'package:work_manager/shared/constants/colors.dart';
+import '../../../shared/widgets/date_range_picker.dart';
 
 Future<void> showAddMeetingDialog(
     BuildContext context, AnnualCalendarController controller) async {
@@ -10,41 +12,66 @@ Future<void> showAddMeetingDialog(
   DateTime? pickedDate = controller.selectedDate.value;
 
   await showDialog(
-    context: context, // dùng context được truyền vào
+    context: context,
     builder: (dialogContext) {
       return StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: Text('information'.tr), // đa ngôn ngữ
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: Text(
+              'information'.tr,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   TextField(
                     controller: titleController,
-                    decoration: InputDecoration(labelText: AppLanguageKey.titleMeeting.tr),
+                    decoration: InputDecoration(
+                      labelText: AppLanguageKey.titleMeeting.tr,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   TextField(
                     controller: timeController,
-                    decoration: InputDecoration(labelText: AppLanguageKey.timeMeeting.tr),
+                    decoration: InputDecoration(
+                      labelText: AppLanguageKey.timeMeeting.tr,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
-                        child: Text(
-                          pickedDate == null
-                              ? 'No date picked'.tr
-                              : pickedDate!.toLocal().toString().split(' ')[0],
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 14),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            pickedDate == null
+                                ? 'No date picked'.tr
+                                : pickedDate!.toLocal().toString().split(' ')[0],
+                            style: const TextStyle(fontSize: 16),
+                          ),
                         ),
                       ),
-                      ElevatedButton(
+                      const SizedBox(width: 12),
+                      OutlinedButton.icon(
                         onPressed: () async {
-                          final date = await showDatePicker(
-                            context: context,
-                            initialDate: pickedDate ?? DateTime.now(),
-                            firstDate: DateTime(2000),
+                          final date = await defaultShowDatePicker(
+                            context,
+                            pickedDate,
                             lastDate: DateTime(2100),
                           );
                           if (date != null) {
@@ -53,16 +80,36 @@ Future<void> showAddMeetingDialog(
                             });
                           }
                         },
-                        child: Text(AppLanguageKey.pickedDate.tr),
+                        style: OutlinedButton.styleFrom(
+                          side:
+                              BorderSide(color: ColorConstants.highlightPrimary),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 14),
+                        ),
+                        icon: Icon(Icons.date_range,
+                            color: ColorConstants.highlightPrimary),
+                        label: Text(
+                          AppLanguageKey.pickedDate.tr,
+                          style:
+                              TextStyle(color: ColorConstants.highlightPrimary),
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
+            actionsPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             actions: [
               TextButton(
                 onPressed: () => Get.back(),
+                style: TextButton.styleFrom(
+                  foregroundColor: ColorConstants.highlightPrimary,
+                ),
                 child: Text(AppLanguageKey.cancel.tr),
               ),
               ElevatedButton(
@@ -83,7 +130,18 @@ Future<void> showAddMeetingDialog(
                   controller.selectedDate.value = pickedDate!;
                   Get.back();
                 },
-                child: Text(AppLanguageKey.save.tr),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorConstants.highlightPrimary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
+                child: Text(
+                  AppLanguageKey.save.tr,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ],
           );
