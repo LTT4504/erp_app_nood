@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../lang/app_language_key.dart';
 import '../my_leave_controller.dart';
+import '../../../shared/widgets/date_range_picker.dart';
 
 class LeaveFilterDialog extends StatefulWidget {
   final LeaveController controller;
@@ -162,12 +163,7 @@ class _LeaveFilterDialogState extends State<LeaveFilterDialog> {
   }) {
     return InkWell(
       onTap: () async {
-        final picked = await showDatePicker(
-          context: context,
-          initialDate: date ?? DateTime.now(),
-          firstDate: DateTime(2000),
-          lastDate: DateTime(2100),
-        );
+        final picked = await defaultShowDatePicker(context, date);
         if (picked != null) onPicked(picked);
       },
       child: InputDecorator(

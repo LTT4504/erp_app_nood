@@ -130,13 +130,12 @@ class _DateBox extends StatelessWidget {
 
 /// Hàm mặc định cho showDatePicker với màu theme
 Future<DateTime?> defaultShowDatePicker(
-    BuildContext context, DateTime? initialDate) {
-  final now = DateTime.now();
+    BuildContext context, DateTime? initialDate, {DateTime? lastDate}) {
   return showDatePicker(
     context: context,
     initialDate: initialDate ?? DateTime.now(),
     firstDate: DateTime(2020),
-    lastDate: now,
+    lastDate: lastDate ?? DateTime(2100),
     builder: (context, child) {
       return Theme(
         data: Theme.of(context).copyWith(
