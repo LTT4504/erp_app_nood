@@ -57,6 +57,7 @@ const Map<String, String> en_US = {
   'about_us': 'About Us',
   'logout': 'Logout',
   'full_name': 'Full Name',
+  'full_number': 'Full Number',
   'employee_id': 'Employee ID',
 
   // Leave Request
@@ -139,4 +140,61 @@ const Map<String, String> en_US = {
   'system_testing': 'System Testing',
   'low': 'Low',
 
+  // Education
+  'education_information': 'Education Information',
+  'soft_skills': 'Soft Skills',
+  'business_experience': 'Business Experience',
+  'foreign_languages': 'Foreign Languages',
+  'english': 'English',
+  'japanese': 'Japanese',
+
+  //Bank And Salary
+  'bank_name': 'Bank Name',
+  'account_name': 'Account Name',
+  'account_number': 'Account Number',
+  'salary_basic': 'Salary Basic',
+  'payment_type': 'Payment Type',
+  'salary_gross': 'Salary Gross',
+  'cash': 'Cash',
+  'bank_transfer': 'Bank Transfer',
+
+  // Position
+  'position_details': 'Position Details',
+  'job_title': 'Job Titile',
+  'department': 'Department',
+  'work_location': 'Work Location',
+
+  //Emergency Contact
+  'primary_contact': 'Primary Contact',
+  'relationship': 'Relationship',
+  'secondary_contact': 'Secondary Contact',
+
+  //General Information
+  'nick_name': 'Nick Name',
+  'birth_day': 'Birth Day',
+  'gender': 'Gender',
+  'phone_number': 'Phone Number',
+  'id_number': 'ID Number',
+  'provide_date': 'Provide Date',
+  'provide_place': 'Provide Place',
+  'marital_status': 'Marital Status',
+  'number_of_children': 'Number Of Children',
+  'place_of_birth': 'Place Of Birth',
+  'permanent_address': 'Parmanent Address',
+
+  //Task Detail
+  'task_detail': 'Task Detail',
+  'description': 'Description',
+  'comments': 'Comments',
+  'document': 'Document',
+  'sub_tasks': 'Sub Tasks',
+  'history': 'History',
+  'parent_task': 'Parent Task',
+  'priority': 'Priority',
+  'assignee': ' Assignee',
+  'completed_time': 'Completed Time',
+  'estimated_time': 'Estimated Time',
+  'progress' : 'Progress',
+  'log_time' : 'Log Time',
+  '--hours' : '-- hours',
 };

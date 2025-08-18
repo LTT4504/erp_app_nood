@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import 'package:work_manager/shared/constants/colors.dart';
 import '../../../shared/widgets/custom_text_form_field.dart';
 import '../../../shared/widgets/edit_fab.dart';
@@ -15,9 +16,9 @@ class PositionScreen extends GetView<PositionController> {
       backgroundColor: ColorConstants.highlightPrimaryPastel,
       appBar: AppBar(
         foregroundColor: ColorConstants.white,
-        title: const Text(
-          "Position",
-          style: TextStyle(color: ColorConstants.white),
+        title:  Text(
+          AppLanguageKey.position.tr,
+          style: const TextStyle(color: ColorConstants.white),
         ),
         backgroundColor: ColorConstants.highlightPrimary,
         centerTitle: true,

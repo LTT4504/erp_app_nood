@@ -4,6 +4,14 @@ import '../../../models/model/education_model.dart';
 import '../../../shared/services/education_service.dart';
 
 
+class StorageKeys {
+  static const String educationInformation = 'education_information';
+  static const String softSkills = 'soft_skills';
+  static const String businessExperience = 'business_experience';
+  static const String english = 'english';
+  static const String japanese = 'japanese';
+}
+
 class EducationController extends GetxController {
   final isLoading = false.obs;
   final isEditing = false.obs;

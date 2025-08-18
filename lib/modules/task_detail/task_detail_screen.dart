@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import '../../shared/constants/colors.dart';
 import 'task_detail_controller.dart';
 
@@ -18,9 +19,9 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
           backgroundColor: ColorConstants.highlightPrimary,
           elevation: 2,
           shadowColor: Colors.black26,
-          title: const Text(
-            'Task Detail',
-            style: TextStyle(
+          title: Text(
+            AppLanguageKey.taskDetail.tr,
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
               letterSpacing: 0.5,
@@ -31,21 +32,21 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
             preferredSize: const Size.fromHeight(48),
             child: Container(
               color: ColorConstants.highlightPrimaryPastel,
-              child: const TabBar(
+              child: TabBar(
                 isScrollable: true,
-                indicatorColor:ColorConstants.highlightPrimary,
+                indicatorColor: ColorConstants.highlightPrimary,
                 indicatorWeight: 3,
                 labelColor: ColorConstants.highlightPrimary,
-                unselectedLabelColor: Colors.black, 
-                labelStyle: TextStyle(fontWeight: FontWeight.w600),
+                unselectedLabelColor: Colors.black,
+                labelStyle: const TextStyle(fontWeight: FontWeight.w600),
                 tabAlignment: TabAlignment.start,
                 tabs: [
-                  Tab(text: 'Information'),
-                  Tab(text: 'Description'),
-                  Tab(text: 'Comments'),
-                  Tab(text: 'Document'),
-                  Tab(text: 'Sub Tasks'),
-                  Tab(text: 'History'),
+                  Tab(text: AppLanguageKey.information.tr),
+                  Tab(text: AppLanguageKey.description.tr),
+                  Tab(text: AppLanguageKey.comments.tr),
+                  Tab(text: AppLanguageKey.document.tr),
+                  Tab(text: AppLanguageKey.subTasks.tr),
+                  Tab(text: AppLanguageKey.history.tr),
                 ],
               ),
             ),
@@ -96,13 +97,15 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                                       child: Container(
                                         padding: const EdgeInsets.all(6),
                                         decoration: BoxDecoration(
-                                          color: ColorConstants.highlightPrimaryPastel,
+                                          color: ColorConstants
+                                              .highlightPrimaryPastel,
                                           borderRadius:
                                               BorderRadius.circular(8),
                                         ),
                                         child: const Icon(
                                           Icons.edit,
-                                          color: ColorConstants.highlightPrimary,
+                                          color:
+                                              ColorConstants.highlightPrimary,
                                           size: 20,
                                         ),
                                       ),
@@ -111,26 +114,28 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                                 ),
                                 const SizedBox(height: 16),
                                 // Info list
-                                _buildInfoItem(Icons.layers, 'Parent Task',
+                                _buildInfoItem(Icons.layers,  AppLanguageKey.parentTask.tr,
                                     task['parentTask'] ?? ''),
-                                _buildInfoItem(Icons.flag, 'Status',
-                                    task['status'] ?? ''),
-                                _buildInfoItem(Icons.priority_high, 'Priority',
+                                _buildInfoItem(
+                                    Icons.flag,  AppLanguageKey.status.tr, task['status'] ?? ''),
+                                _buildInfoItem(Icons.priority_high,  AppLanguageKey.priority.tr,
                                     task['priority'] ?? ''),
-                                _buildInfoItem(Icons.person, 'Assignee',
+                                _buildInfoItem(Icons.person, AppLanguageKey.assignee.tr,
                                     task['assignee'] ?? ''),
-                                _buildInfoItem(Icons.timer, 'Completed time',
-                                    task['completedTime'] ?? '-- hours'),
-                                _buildInfoItem(Icons.access_time, 'Estimated time',
-                                    task['estimatedTime'] ?? '-- hours'),
-                                _buildInfoItem(Icons.calendar_today, 'From date',
-                                    task['fromDate'] ?? ''),
-                                _buildInfoItem(Icons.event, 'To date',
+                                _buildInfoItem(Icons.timer,  AppLanguageKey.completedTime.tr,
+                                    task['completedTime'] ?? AppLanguageKey.hours.tr),
+                                _buildInfoItem(
+                                    Icons.access_time,
+                                     AppLanguageKey.estimatedTime.tr,
+                                    task['estimatedTime'] ?? AppLanguageKey.hours.tr),
+                                _buildInfoItem(Icons.calendar_today,
+                                     AppLanguageKey.fromDate.tr, task['fromDate'] ?? ''),
+                                _buildInfoItem(Icons.event,  AppLanguageKey.toDate.tr,
                                     task['toDate'] ?? ''),
                                 const SizedBox(height: 16),
-                                const Text(
-                                  'Progress',
-                                  style: TextStyle(
+                                 Text(
+                                   AppLanguageKey.progress.tr,
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16,
                                   ),
@@ -139,9 +144,9 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
                                   child: LinearProgressIndicator(
-                                    value: ((task['progress'] as num? ?? 0) /
-                                            100)
-                                        .clamp(0.0, 1.0),
+                                    value:
+                                        ((task['progress'] as num? ?? 0) / 100)
+                                            .clamp(0.0, 1.0),
                                     backgroundColor: Colors.grey.shade300,
                                     color: ColorConstants.highlightPrimary,
                                     minHeight: 10,
@@ -164,22 +169,22 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton.icon(
-                            icon: const Icon(Icons.access_time, color: Colors.white),
+                            icon: const Icon(Icons.access_time,
+                                color: Colors.white),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorConstants.highlightPrimary,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 14),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
                             onPressed: () {
                               // Xử lý log time
                             },
-                            label: const Text(
-                              'Log Time',
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.white),
+                            label:  Text(
+                               AppLanguageKey.logTime.tr,
+                              style:
+                                  const TextStyle(fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ),
