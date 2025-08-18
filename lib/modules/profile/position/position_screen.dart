@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_manager/shared/constants/colors.dart';
 import '../../../shared/widgets/custom_text_form_field.dart';
+import '../../../shared/widgets/edit_fab.dart';
+import '../../../shared/widgets/action_buttons.dart';
 import 'position_controller.dart';
 
 class PositionScreen extends GetView<PositionController> {
@@ -22,23 +24,38 @@ class PositionScreen extends GetView<PositionController> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: _buildLabeledCard(
-          label: "Position Details",
+        child: Column(
           children: [
-            _buildCustomField("Job Title", "Enter your job title", Icons.work,
-                controller.jobTitleController),
-            _buildCustomField("Department", "Enter your department",
-                Icons.apartment, controller.departmentController),
-            _buildCustomField("Work Location", "Enter work location",
-                Icons.location_on, controller.workLocationController),
+            _buildLabeledCard(
+              label: "Position Details",
+              children: [
+                _buildCustomField("Job Title", "Enter your job title",
+                    Icons.work, controller.jobTitleController),
+                _buildCustomField("Department", "Enter your department",
+                    Icons.apartment, controller.departmentController),
+                _buildCustomField("Work Location", "Enter work location",
+                    Icons.location_on, controller.workLocationController),
+              ],
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
-      floatingActionButton: Obx(() => FloatingActionButton(
-            backgroundColor: Colors.green,
-            onPressed: controller.toggleEdit,
-            child: Icon(controller.isEditing.value ? Icons.save : Icons.edit),
-          )),
+      bottomNavigationBar: Obx(() => controller.isEditing.value
+          ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+              child: ActionButtons(
+                onCancel: controller.cancelEdit,
+                onSave: controller.saveData,
+              ),
+            )
+          : const SizedBox.shrink()),
+      floatingActionButton: Obx(() => !controller.isEditing.value
+          ? EditFAB(
+              isEditing: controller.isEditing,
+              onEdit: controller.toggleEdit,
+            )
+          : const SizedBox.shrink()),
     );
   }
 
@@ -49,7 +66,11 @@ class PositionScreen extends GetView<PositionController> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: ColorConstants.highlightPrimary),
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: ColorConstants.highlightPrimary,
+          ),
         ),
         const SizedBox(height: 8),
         Card(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_manager/shared/constants/colors.dart';
 import 'package:work_manager/shared/widgets/custom_text_form_field.dart';
+import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/edit_fab.dart';
 import 'emergency_contact_controller.dart';
 
 class EmergencyContactScreen extends GetView<EmergencyContactController> {
@@ -108,34 +110,22 @@ class EmergencyContactScreen extends GetView<EmergencyContactController> {
           );
         }),
       ),
-      floatingActionButton: Obx(() {
-        if (controller.isEditing.value) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              FloatingActionButton(
-                heroTag: "cancel",
-                backgroundColor: Colors.red,
-                onPressed: controller.cancelEdit,
-                child: const Icon(Icons.close, color: Colors.white),
+      bottomNavigationBar: Obx(() => controller.isEditing.value
+          ? Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+              child: ActionButtons(
+                onCancel: controller.cancelEdit,
+                onSave: controller.saveContact,
               ),
-              const SizedBox(width: 12),
-              FloatingActionButton(
-                heroTag: "save",
-                backgroundColor: Colors.green,
-                onPressed: controller.saveContact,
-                child: const Icon(Icons.check, color: Colors.white),
-              ),
-            ],
-          );
-        } else {
-          return FloatingActionButton(
-            backgroundColor: Colors.green,
-            onPressed: controller.toggleEdit,
-            child: const Icon(Icons.edit, color: Colors.white),
-          );
-        }
-      }),
+            )
+          : const SizedBox.shrink()),
+     floatingActionButton: EditFAB(
+  isEditing: controller.isEditing,
+  onEdit: () {
+    controller.isEditing.value = true;
+  },
+),
+
     );
   }
 }

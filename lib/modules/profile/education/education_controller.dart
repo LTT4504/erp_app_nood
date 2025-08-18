@@ -1,42 +1,69 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import '../../../models/model/education_model.dart';
+import '../../../shared/services/education_service.dart';
+
 
 class EducationController extends GetxController {
-  final box = GetStorage();
+  final isLoading = false.obs;
+  final isEditing = false.obs;
 
-  var educationInfo = "".obs;
-  var softSkills = "".obs;
-  var businessExperience = "".obs;
-  var englishLevel = "".obs;
-  var japaneseLevel = "".obs;
+  // Controllers
+  final educationInfoController = TextEditingController();
+  final businessExpController = TextEditingController();
+  final softSkillsController = TextEditingController();
+  final englishController = TextEditingController();
+  final japaneseController = TextEditingController();
 
-  var isEditing = false.obs;
+  var educationModel = Rxn<EducationModel>();
 
   @override
   void onInit() {
     super.onInit();
-    loadData();
+    fetchEducationInfo();
   }
 
-  void loadData() {
-    educationInfo.value = box.read('educationInfo') ?? "Đại học VKU";
-    softSkills.value = box.read('softSkills') ?? "KNM";
-    businessExperience.value = box.read('businessExperience') ?? "Dài Dài";
-    englishLevel.value = box.read('englishLevel') ?? "9.0";
-    japaneseLevel.value = box.read('japaneseLevel') ?? "5.2";
+  Future<void> fetchEducationInfo() async {
+    isLoading.value = true;
+    final data = await EducationService.getEducationInfo();
+    if (data != null) {
+      educationModel.value = data;
+      _fillControllers(data);
+    }
+    isLoading.value = false;
   }
 
-  void toggleEditing() {
-    isEditing.value = !isEditing.value;
+  void _fillControllers(EducationModel data) {
+    educationInfoController.text = data.education;
+    businessExpController.text = data.businessExperience;
+    softSkillsController.text = data.softSkills;
+    englishController.text = data.englishLevel;
+    japaneseController.text = data.japaneseLevel;
   }
 
-  void saveData() {
-    box.write('educationInfo', educationInfo.value);
-    box.write('softSkills', softSkills.value);
-    box.write('businessExperience', businessExperience.value);
-    box.write('englishLevel', englishLevel.value);
-    box.write('japaneseLevel', japaneseLevel.value);
+  Future<void> saveEducationInfo() async {
+    final model = EducationModel(
+      education: educationInfoController.text,
+      businessExperience: businessExpController.text,
+      softSkills: softSkillsController.text,
+      englishLevel: englishController.text,
+      japaneseLevel: japaneseController.text,
+    );
 
+    final success = await EducationService.updateEducationInfo(model);
+    if (success) {
+      Get.snackbar("Success", "Education info updated successfully");
+      educationModel.value = model;
+      isEditing.value = false;
+    } else {
+      Get.snackbar("Error", "Failed to update education info");
+    }
+  }
+
+  void cancelEdit() {
+    if (educationModel.value != null) {
+      _fillControllers(educationModel.value!);
+    }
     isEditing.value = false;
   }
 }
