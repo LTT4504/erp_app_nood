@@ -1,4 +1,3 @@
-
 abstract class AppRoutes {
   static const login = '/login';
   static const home = '/home';
@@ -19,4 +18,6 @@ abstract class AppRoutes {
   static const position = '/position';
   static const bankSalary = '/bank-salary';
   static const emergencyContact = '/emergency-contact';
+  static const myProject = '/my-project';
+  static const projectDetail = '/project-detail';
 }

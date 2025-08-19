@@ -4,6 +4,10 @@ import 'package:work_manager/modules/profile/bank_salary/bank_salary_screen.dart
 import '../modules/annual_calendar/annual_calendar_binding.dart';
 import '../modules/annual_calendar/annual_calendar_screen.dart';
 import '../modules/attendance/attendance_history_screen.dart';
+import '../modules/my project/project_binding.dart';
+import '../modules/my project/project_screen.dart';
+import '../modules/my project/widgets/project_detail_binding.dart';
+import '../modules/my project/widgets/project_detail_screen.dart';
 import '../modules/my_leave/my_leave_binding.dart';
 import '../modules/my_leave/my_leave_screen.dart';
 import '../modules/my_task/my_task_screen.dart';
@@ -130,6 +134,16 @@ class AppPages {
       name: AppRoutes.emergencyContact,
       page: () => const EmergencyContactScreen(),
       binding: EmergencyContactBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.myProject,
+      page: () => const ProjectScreen(),
+      binding: ProjectBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.projectDetail,
+      page: () => const ProjectDetailScreen(),
+      binding: ProjectDetailBinding(),
     ),
   ];
 }

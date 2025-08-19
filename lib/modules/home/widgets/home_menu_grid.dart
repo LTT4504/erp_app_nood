@@ -39,6 +39,7 @@ class HomeMenuGrid extends StatelessWidget {
         'label': AppLanguageKey.myProjects,
         'bgColor': const Color(0xFFFFE4E3),
         'iconColor': const Color(0xFFFF4D4D),
+        'route': AppRoutes.myProject,
       },
       {
         'icon': Icons.event,
