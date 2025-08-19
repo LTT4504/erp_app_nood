@@ -18,6 +18,7 @@ Future<void> main() async {
 
   Get.put(LocaleController());
   Get.put(EducationController());
+
   runApp(const MyApp());
 }
 

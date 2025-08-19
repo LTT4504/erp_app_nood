@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:work_manager/lang/app_language_key.dart';
 import '../../shared/constants/colors.dart';
+import 'comment_detail/comments_screen.dart';
+import 'description_detail/description_screen.dart';
+import 'document_detail/document_screen.dart';
+import 'subtask_detail/subtask_screen.dart';
 import 'task_detail_controller.dart';
 
 class TaskDetailScreen extends GetView<TaskDetailController> {
@@ -114,27 +118,43 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                                 ),
                                 const SizedBox(height: 16),
                                 // Info list
-                                _buildInfoItem(Icons.layers,  AppLanguageKey.parentTask.tr,
+                                _buildInfoItem(
+                                    Icons.layers,
+                                    AppLanguageKey.parentTask.tr,
                                     task['parentTask'] ?? ''),
                                 _buildInfoItem(
-                                    Icons.flag,  AppLanguageKey.status.tr, task['status'] ?? ''),
-                                _buildInfoItem(Icons.priority_high,  AppLanguageKey.priority.tr,
+                                    Icons.flag,
+                                    AppLanguageKey.status.tr,
+                                    task['status'] ?? ''),
+                                _buildInfoItem(
+                                    Icons.priority_high,
+                                    AppLanguageKey.priority.tr,
                                     task['priority'] ?? ''),
-                                _buildInfoItem(Icons.person, AppLanguageKey.assignee.tr,
+                                _buildInfoItem(
+                                    Icons.person,
+                                    AppLanguageKey.assignee.tr,
                                     task['assignee'] ?? ''),
-                                _buildInfoItem(Icons.timer,  AppLanguageKey.completedTime.tr,
-                                    task['completedTime'] ?? AppLanguageKey.hours.tr),
+                                _buildInfoItem(
+                                    Icons.timer,
+                                    AppLanguageKey.completedTime.tr,
+                                    task['completedTime'] ??
+                                        AppLanguageKey.hours.tr),
                                 _buildInfoItem(
                                     Icons.access_time,
-                                     AppLanguageKey.estimatedTime.tr,
-                                    task['estimatedTime'] ?? AppLanguageKey.hours.tr),
-                                _buildInfoItem(Icons.calendar_today,
-                                     AppLanguageKey.fromDate.tr, task['fromDate'] ?? ''),
-                                _buildInfoItem(Icons.event,  AppLanguageKey.toDate.tr,
+                                    AppLanguageKey.estimatedTime.tr,
+                                    task['estimatedTime'] ??
+                                        AppLanguageKey.hours.tr),
+                                _buildInfoItem(
+                                    Icons.calendar_today,
+                                    AppLanguageKey.fromDate.tr,
+                                    task['fromDate'] ?? ''),
+                                _buildInfoItem(
+                                    Icons.event,
+                                    AppLanguageKey.toDate.tr,
                                     task['toDate'] ?? ''),
                                 const SizedBox(height: 16),
-                                 Text(
-                                   AppLanguageKey.progress.tr,
+                                Text(
+                                  AppLanguageKey.progress.tr,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16,
@@ -181,20 +201,20 @@ class TaskDetailScreen extends GetView<TaskDetailController> {
                             onPressed: () {
                               // Xử lý log time
                             },
-                            label:  Text(
-                               AppLanguageKey.logTime.tr,
-                              style:
-                                  const TextStyle(fontSize: 16, color: Colors.white),
+                            label: Text(
+                              AppLanguageKey.logTime.tr,
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.white),
                             ),
                           ),
                         ),
                       ],
                     ),
             ),
-            const Center(child: Text("Description content")),
-            const Center(child: Text("Comments content")),
-            const Center(child: Text("Document content")),
-            const Center(child: Text("Sub Tasks content")),
+            const DescriptionScreen(),
+            const CommentsScreen(),
+            const DocumentScreen(),
+            const SubTaskScreen(),
             const Center(child: Text("History content")),
           ],
         ),
