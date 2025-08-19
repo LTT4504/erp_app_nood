@@ -130,7 +130,7 @@ class AppPages {
       page: () => const BankSalaryScreen(),
       binding: BankSalaryBinding(),
     ),
-    GetPage(  
+    GetPage(
       name: AppRoutes.emergencyContact,
       page: () => const EmergencyContactScreen(),
       binding: EmergencyContactBinding(),
@@ -140,10 +140,15 @@ class AppPages {
       page: () => const ProjectScreen(),
       binding: ProjectBinding(),
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.projectDetail,
       page: () => const ProjectDetailScreen(),
       binding: ProjectDetailBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.taskDetail,
+      page: () => const TaskDetailScreen(),
+      binding: TaskDetailBinding(),
     ),
   ];
 }
