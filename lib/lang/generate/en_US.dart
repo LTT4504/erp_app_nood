@@ -194,7 +194,20 @@ const Map<String, String> en_US = {
   'assignee': ' Assignee',
   'completed_time': 'Completed Time',
   'estimated_time': 'Estimated Time',
-  'progress' : 'Progress',
-  'log_time' : 'Log Time',
-  '--hours' : '-- hours',
+  'progress': 'Progress',
+  'log_time': 'Log Time',
+  '--hours': '-- hours',
+
+  //Task-Description
+  'enter_a_description': 'Enter a description',
+  'no_data_yet': 'No data yet',
+
+  //Task-Sub
+  'add_sub_task' : 'Add Sub Task',
+
+  //Task-Comment
+  'There_are_no_comments_yet': 'There are no comments yet',
+  'enter_content': 'Enter content',
+  'add_comment': 'Add Comment',
+  'add_document': 'Add Document',
 };

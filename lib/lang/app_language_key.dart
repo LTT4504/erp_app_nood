@@ -182,4 +182,20 @@ class AppLanguageKey {
   static const String progress = 'progress';
   static const String logTime = 'log_time';
   static const String hours = '--hours';
+
+  //Task-Description
+  static const String enterADescription = 'enter_a_description';
+  static const String noDataYet = 'no_data_yet';
+
+  //Task-Decument
+  static const String addDocument = 'add_document';
+
+  //Task-Sub
+  static const String addSubTask = 'add_sub_task';
+
+  //Task-Comment
+  // ignore: constant_identifier_names
+  static const String ThereAreNoCommentsYet = 'There_are_no_comments_yet';
+  static const String enterContent = 'enter_content';
+  static const String addComment = 'add_comment';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import 'package:work_manager/shared/constants/colors.dart';
 import 'comments_controller.dart';
 
@@ -11,15 +12,15 @@ class CommentsScreen extends GetView<CommentsController> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Thêm comment"),
+        title: Text(AppLanguageKey.addComment.tr),
         content: TextField(
           controller: controllerText,
-          decoration: const InputDecoration(hintText: "Nhập nội dung..."),
+          decoration: InputDecoration(hintText: AppLanguageKey.enterContent.tr),
         ),
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("Hủy")),
+              child: Text(AppLanguageKey.cancel.tr)),
           ElevatedButton(
               onPressed: () {
                 if (controllerText.text.trim().isNotEmpty) {
@@ -28,7 +29,7 @@ class CommentsScreen extends GetView<CommentsController> {
                   Navigator.pop(context);
                 }
               },
-              child: const Text("Lưu")),
+              child: Text(AppLanguageKey.save.tr)),
         ],
       ),
     );
@@ -41,7 +42,7 @@ class CommentsScreen extends GetView<CommentsController> {
       body: Obx(() {
         final comments = controller.comments;
         if (comments.isEmpty) {
-          return const Center(child: Text("Chưa có comment"));
+          return Center(child: Text(AppLanguageKey.ThereAreNoCommentsYet.tr));
         }
         return ListView.builder(
           padding: const EdgeInsets.all(8),

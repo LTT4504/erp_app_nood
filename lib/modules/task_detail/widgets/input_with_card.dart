@@ -1,5 +1,7 @@
 // lib/shared/widgets/input_with_card.dart
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 
 class InputWithCard extends StatelessWidget {
   final String hintText;
@@ -21,7 +23,7 @@ class InputWithCard extends StatelessWidget {
       children: [
         Expanded(
           child: children.isEmpty
-              ? const Center(child: Text("Chưa có dữ liệu"))
+              ? Center(child: Text(AppLanguageKey.noDataYet.tr))
               : ListView(
                   padding: const EdgeInsets.all(16),
                   children: children,

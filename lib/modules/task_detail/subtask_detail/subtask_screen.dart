@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 
 import '../widgets/input_with_card.dart';
 import 'subtask_controller.dart';
@@ -11,7 +12,7 @@ class SubTaskScreen extends GetView<SubTaskController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return InputWithCard(
-        hintText: "Thêm sub-task...",
+        hintText: AppLanguageKey.addSubTask.tr,
         onSubmit: controller.addSubTask,
         children: controller.subTasks
             .asMap()

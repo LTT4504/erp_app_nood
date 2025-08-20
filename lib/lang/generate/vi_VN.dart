@@ -198,5 +198,18 @@ const Map<String, String> vi_VN = {
   'estimated_time': 'Thời gian ước tính',
   'progress': 'Tiến độ',
   'log_time': 'Thời gian ghi nhật ký',
-  '--hours' : '-- Giờ',
+  '--hours': '-- Giờ',
+
+  //Mô tả nhiệm vụ
+  'enter_a_description': 'Nhập mô tả',
+  'no_data_yet': 'Chưa có dữ liệu',
+
+  //Task-Sub
+  'add_sub_task': 'Add Sub Task',
+
+  //Bình luận nhiệm vụ
+  'There_are_no_comments_yet': 'Chưa có bình luận nào',
+  'enter_content': 'Nhập nội dung',
+  'add_comment': 'Thêm bình luận',
+  'add_document': 'Thêm tài liệu',
 };

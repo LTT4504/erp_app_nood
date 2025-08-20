@@ -1,6 +1,7 @@
 // lib/task_detail/document_detail/document_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:work_manager/lang/app_language_key.dart';
 import '../widgets/input_with_card.dart';
 import 'document_controller.dart';
 
@@ -11,7 +12,7 @@ class DocumentScreen extends GetView<DocumentController> {
   Widget build(BuildContext context) {
     return Obx(() {
       return InputWithCard(
-        hintText: "Thêm tài liệu...",
+        hintText: AppLanguageKey.addDocument.tr,
         onSubmit: controller.addDocument,
         children: controller.documents
             .map((doc) => Card(
